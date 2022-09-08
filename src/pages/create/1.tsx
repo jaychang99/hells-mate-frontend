@@ -44,10 +44,10 @@ const DatePickerWrapper = styled(motion.div)`
   align-items: center;
 `;
 
-export default function SetDay() {
+export default function SetDayPage() {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  const [durationDay, setDurationDay] = useState<Number>(0);
+  const [durationDay, setDurationDay] = useState(0);
 
   return (
     <FormContainer variants={staggerOne} initial="initial" whileInView="animate" exit="exit">
