@@ -1,27 +1,16 @@
 import { ChangeEvent, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import styled from "@emotion/styled";
 import { BlueGt } from "components/common/BlueGt";
 import { MoveContainer } from "components/common/Container";
-import { SubDescript, Title } from "components/common/Description";
+import { Title } from "components/common/Description";
 import { StyledInput, StyledTextarea } from "components/common/Input/styles";
+import { FormContainer, GobackAnchor, GroupDescription } from "components/pages/create/styles";
 import { motion } from "framer-motion";
 import { defaultFadeInVariants, staggerOne } from "styles/motions";
 
 import lPolygon from "/public/icons/lPolygon.svg";
 import rPolygon from "/public/icons/rPolygon.svg";
-
-const FormContainer = styled(motion.form)`
-  padding: 53px 16px;
-`;
-
-const GroupDescription = styled(SubDescript)`
-  font-size: 14px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  margin-left: 0;
-`;
 
 export default function SetGroupPage() {
   const [name, setName] = useState("");
@@ -36,10 +25,6 @@ export default function SetGroupPage() {
     const value = e.target.value;
     setGroupDes(value);
   };
-
-  const GobackAnchor = styled(motion.a)`
-    font-size: 20px;
-  `;
 
   return (
     <FormContainer variants={staggerOne} initial="initial" whileInView="animate" exit="exit">
