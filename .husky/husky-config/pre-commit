@@ -3,8 +3,6 @@
 
 echo '🏗️👷 Before commit, Checking format, linting and typing your project.'
 
-cd frontend
-
 # Check Prettier standards
 yarn check-format ||
 (
