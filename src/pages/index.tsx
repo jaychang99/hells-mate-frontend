@@ -13,7 +13,9 @@ import {
   MainPageTopRowContainer,
   StyledMainPageContainer,
 } from "components/pages/main/styles";
-import { useAxiosData } from "hooks/useAxiosData";
+
+// import { useAxiosData } from "hooks/useAxiosData";
+import { MOCKUP_CHALLENGES } from "../mockups/challenges";
 
 import rankingIcon from "/public/icons/ranking_icon.svg";
 
@@ -23,7 +25,7 @@ declare global {
   }
 }
 const Home: NextPage = () => {
-  const apiGroupData: any = useAxiosData("/group");
+  const apiGroupData: any = MOCKUP_CHALLENGES;
 
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [isShowing, setIsShowing] = useState(false);
@@ -58,15 +60,15 @@ const Home: NextPage = () => {
             <Calendar onDateChange={setSelectedDate} selectedDate={selectedDate} />
           </MainPageCalendarContaier>
           <MainPageChallengesContainer>
-            {apiGroupData.data?.group?.map((groupItem: any, index: any) => (
+            {apiGroupData.map((groupItem: any, index: any) => (
               <Challenge
                 onAreaClick={() => {
                   setIsShowing(true);
                 }}
                 key={index}
-                challengeTitle={groupItem.title}
-                description={groupItem.content}
-                members={groupItem.names}
+                challengeTitle={groupItem.challengeTitle}
+                description={groupItem.description}
+                members={groupItem.members}
                 category={groupItem.categoryId}
               />
             ))}

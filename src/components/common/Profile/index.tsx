@@ -16,10 +16,10 @@ import defaultProfilePicture from "/public/images/default_profile_icon.svg";
 interface Props extends HTMLAttributes<HTMLDivElement> {
   member: Member;
   checkStatusInfo: boolean[];
-  currentUser: number;
+  currentUser?: any;
   challengeTitle: string;
   description: string;
-  isClickable: boolean;
+  isClickable?: boolean;
 }
 
 function Profile({
@@ -60,7 +60,7 @@ function Profile({
           challengeTitle={challengeTitle}
           description={description}
           member={member}
-          currentUser={{ id: 1, nickname: "서하서하" }}
+          currentUser={{ id: 1, nickname: "서하서하", profilesrc: null }}
           checkStatusInfo={checkStatusInfo}
         />
       </BottomSheet>
