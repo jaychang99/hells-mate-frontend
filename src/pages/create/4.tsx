@@ -6,10 +6,11 @@ import { ImageContainer, MoveContainer } from "components/common/Container";
 import { motion } from "framer-motion";
 import { defaultFadeInVariants, staggerOne } from "styles/motions";
 
-import letter from "../../../images/letter.svg";
-import lPolygon from "../../../images/lPolygon.svg";
 import { BoxStyle } from "../../components/common/BlueBox";
 import { Title } from "../../components/common/Description";
+
+import letter from "/public/icons/letter.svg";
+import lPolygon from "/public/icons/lPolygon.svg";
 
 const FormContainer = styled(motion.form)`
   padding: 53px 16px;

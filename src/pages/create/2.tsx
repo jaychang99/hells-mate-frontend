@@ -9,8 +9,8 @@ import { StyledInput, StyledTextarea } from "components/common/Input/styles";
 import { motion } from "framer-motion";
 import { defaultFadeInVariants, staggerOne } from "styles/motions";
 
-import lPolygon from "../../../images/lPolygon.svg";
-import rPolygon from "../../../images/rPolygon.svg";
+import lPolygon from "/public/icons/lPolygon.svg";
+import rPolygon from "/public/icons/rPolygon.svg";
 
 const FormContainer = styled(motion.form)`
   padding: 53px 16px;

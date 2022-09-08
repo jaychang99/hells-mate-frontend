@@ -10,11 +10,12 @@ import { StyledInput, StyledTextarea } from "components/common/Input/styles";
 import { motion } from "framer-motion";
 import { defaultFadeInVariants, staggerOne } from "styles/motions";
 
-import food from "../../../images/food.svg";
-import lPolygon from "../../../images/lPolygon.svg";
-import rPolygon from "../../../images/rPolygon.svg";
-import run from "../../../images/run.svg";
 import styles from "../../styles/radio.module.css";
+
+import food from "/public/icons/food.svg";
+import lPolygon from "/public/icons/lPolygon.svg";
+import rPolygon from "/public/icons/rPolygon.svg";
+import run from "/public/icons/run.svg";
 
 const FormContainer = styled(motion.form)`
   padding: 53px 16px;
