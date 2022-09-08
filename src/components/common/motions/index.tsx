@@ -1,0 +1,1 @@
+export { DefaultMotionDiv } from "./styles";

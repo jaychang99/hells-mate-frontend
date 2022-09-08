@@ -1,0 +1,23 @@
+.radio {
+  display: none;
+}
+
+.radio + label {
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #f5f6fa;
+  cursor: pointer;
+  height: 40px;
+  width: 108px;
+  border: none;
+  border-radius: 30px;
+  line-height: 40px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 14px;
+  color: #677a90;
+}
+
+.radio:checked + label {
+  outline: 2px solid #5f7bff;
+}
