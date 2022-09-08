@@ -30,6 +30,8 @@ function MainPageBottomSheetSection({
         challengeTitle={challengeTitle}
         description={description}
         onAreaClick={() => {}}
+        category={1}
+        members={[member]}
       />
       <BottomSheetResultSelector
         member={member.nickname}

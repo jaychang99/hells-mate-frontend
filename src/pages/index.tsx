@@ -69,7 +69,7 @@ const Home: NextPage = () => {
                 challengeTitle={groupItem.challengeTitle}
                 description={groupItem.description}
                 members={groupItem.members}
-                category={groupItem.categoryId}
+                category={groupItem.category}
               />
             ))}
           </MainPageChallengesContainer>

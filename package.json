@@ -6,13 +6,17 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "check-types": "tsc --pretty --noEmit",
+    "check-format": "prettier --check .",
+    "check-lint": "eslint . --ext ts --ext tsx --ext js"
   },
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@types/react-datepicker": "^4.4.2",
     "axios": "^0.27.2",
+    "check-type": "^0.4.11",
     "date-fns": "^2.29.2",
     "emotion-reset": "^3.0.1",
     "framer-motion": "^7.2.1",

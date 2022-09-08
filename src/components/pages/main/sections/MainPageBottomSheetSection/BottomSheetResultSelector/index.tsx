@@ -7,7 +7,7 @@ import {
 } from "components/pages/main/sections/MainPageBottomSheetSection/BottomSheetResultSelector/styles";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
-  member: string;
+  member: any;
   isOwner: boolean;
   checkStatusInfo: boolean[];
 }
@@ -16,7 +16,13 @@ function BottomSheetResultSelector({ member, isOwner, checkStatusInfo, ...props 
   const [checkStatus, setCheckStatus] = useState(checkStatusInfo);
   return (
     <SelectorContainer>
-      <Profile isClickable={false} member={member} checkStatusInfo={[false, true, false]} />
+      <Profile
+        challengeTitle={"dd"}
+        description="dd"
+        isClickable={false}
+        member={member}
+        checkStatusInfo={[false, true, false]}
+      />
       <SelectorItemContainer>
         <BottomSheetResultSelectorItem
           score={5}

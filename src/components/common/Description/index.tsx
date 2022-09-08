@@ -1,1 +1,1 @@
-export { SubDescript,Title } from "components/common/Description/style";
+export { SubDescript, Title } from "components/common/Description/style";

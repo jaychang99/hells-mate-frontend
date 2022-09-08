@@ -21,7 +21,7 @@ import forkKinfeIcon from "/public/images/forkKnifeIcon.svg";
 import navigateNextIcon from "/public/images/navigateNext.svg";
 
 interface Props extends HTMLAttributes<HTMLDivElement>, ChallengeType {
-  onAreaClick: () => void;
+  onAreaClick?: () => void;
 }
 
 function BottomSheetChallenge({
@@ -29,7 +29,7 @@ function BottomSheetChallenge({
   description,
   members,
   category,
-  onAreaClick,
+  onAreaClick = () => {},
   ...props
 }: Props) {
   const onDeleteHandler = (e: React.MouseEvent<HTMLDivElement>) => {
