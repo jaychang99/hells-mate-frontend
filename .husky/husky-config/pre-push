@@ -3,8 +3,6 @@
 
 echo '🏛🏛🏛🏛... Before push, Trying to build now. 🏛🏛🏛🏛'
 
-cd frontend
-
 yarn build ||
 (
     echo '❌👷🔨❌ Better call Bob... Because your build failed ❌👷🔨❌
