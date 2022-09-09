@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import type { NextPage } from "next";
 import Image from "next/image";
 import Router from "next/router";
@@ -13,6 +13,7 @@ import {
   MainPageTopRowContainer,
   StyledMainPageContainer,
 } from "components/pages/main/styles";
+import useScrollPosition from "hooks/useScrollPosition";
 
 // import { useAxiosData } from "hooks/useAxiosData";
 import { MOCKUP_CHALLENGES } from "../mockups/challenges";
@@ -29,6 +30,9 @@ const Home: NextPage = () => {
 
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [isShowing, setIsShowing] = useState(false);
+
+  const mainPageContainerRef = useRef<HTMLDivElement>(null);
+  const { scrollY } = useScrollPosition(mainPageContainerRef.current);
   if (apiGroupData) {
     return (
       <>
@@ -44,7 +48,7 @@ const Home: NextPage = () => {
           checkStatusInfo={[false, false, true]}
         /> */}
         </BottomSheet>
-        <StyledMainPageContainer>
+        <StyledMainPageContainer ref={mainPageContainerRef}>
           <AddChallengeButton
             onClick={(e: any) => {
               e.preventDefault();
