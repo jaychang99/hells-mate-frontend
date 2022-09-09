@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { BlueGt } from "components/common/BlueGt";
+import BlueNextAnchor from "components/common/BlueNextAnchor";
 import { MoveContainer } from "components/common/Container";
 import { Title } from "components/common/Description";
 import { StyledInput, StyledTextarea } from "components/common/Input/styles";
@@ -14,7 +14,6 @@ import styles from "../../styles/radio.module.css";
 
 import food from "/public/icons/food.svg";
 import lPolygon from "/public/icons/lPolygon.svg";
-import rPolygon from "/public/icons/rPolygon.svg";
 import run from "/public/icons/run.svg";
 
 export default function SetMission() {
@@ -91,9 +90,7 @@ export default function SetMission() {
         placeholder="미션의 내용을 입력해주세요."
       />
       <Link href="/create/4" passHref>
-        <BlueGt>
-          <Image alt={"next"} src={rPolygon} />
-        </BlueGt>
+        <BlueNextAnchor />
       </Link>
     </FormContainer>
   );

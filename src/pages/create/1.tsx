@@ -1,8 +1,7 @@
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import styled from "@emotion/styled";
-import { BlueGt } from "components/common/BlueGt";
+import BlueNextAnchor from "components/common/BlueNextAnchor";
 import { MoveContainer } from "components/common/Container";
 import { Title } from "components/common/Description";
 import StepIndicator from "components/pages/create/StepIndicator";
@@ -11,8 +10,6 @@ import { intervalToDuration } from "date-fns";
 import { motion } from "framer-motion";
 import DatePicker from "react-datepicker";
 import { defaultFadeInVariants, staggerOne } from "styles/motions";
-
-import rPolygon from "/public/icons/rPolygon.svg";
 
 const BetweenDayWrapper = styled(motion.div)`
   display: flex;
@@ -87,9 +84,7 @@ export default function SetDayPage() {
         />
       </DatePickerWrapper>
       <Link href="/create/2" passHref>
-        <BlueGt>
-          <Image alt={"next"} src={rPolygon} />
-        </BlueGt>
+        <BlueNextAnchor />
       </Link>
     </FormContainer>
   );
