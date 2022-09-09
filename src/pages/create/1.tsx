@@ -5,16 +5,13 @@ import styled from "@emotion/styled";
 import { BlueGt } from "components/common/BlueGt";
 import { MoveContainer } from "components/common/Container";
 import { Title } from "components/common/Description";
+import { FormContainer } from "components/pages/create/styles";
 import { intervalToDuration } from "date-fns";
 import { motion } from "framer-motion";
 import DatePicker from "react-datepicker";
 import { defaultFadeInVariants, staggerOne } from "styles/motions";
 
 import rPolygon from "/public/icons/rPolygon.svg";
-
-const FormContainer = styled(motion.form)`
-  padding: 53px 16px;
-`;
 
 const BetweenDayWrapper = styled(motion.div)`
   display: flex;
