@@ -7,7 +7,7 @@ import { SubDescript, Title } from "components/common/Description";
 import { motion } from "framer-motion";
 import { defaultFadeInVariants, staggerOne } from "styles/motions";
 
-import flag from "../../images/flag.svg";
+import flag from "/public/icons/flag.svg";
 
 const FormContainer = styled(motion.form)`
   padding: 53px 16px;

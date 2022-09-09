@@ -1,6 +1,7 @@
 export interface Member {
   id: number;
   nickname: string;
+  profilesrc: string | null;
 }
 
 export interface ChallengeType {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import type { NextPage } from "next";
 import Image from "next/image";
 import Router from "next/router";
@@ -13,7 +13,10 @@ import {
   MainPageTopRowContainer,
   StyledMainPageContainer,
 } from "components/pages/main/styles";
-import { useAxiosData } from "hooks/useAxiosData";
+import useScrollPosition from "hooks/useScrollPosition";
+
+// import { useAxiosData } from "hooks/useAxiosData";
+import { MOCKUP_CHALLENGES } from "../mockups/challenges";
 
 import rankingIcon from "/public/icons/ranking_icon.svg";
 
@@ -23,10 +26,13 @@ declare global {
   }
 }
 const Home: NextPage = () => {
-  const apiGroupData: any = useAxiosData("/group");
+  const apiGroupData: any = MOCKUP_CHALLENGES;
 
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [isShowing, setIsShowing] = useState(false);
+
+  const mainPageContainerRef = useRef<HTMLDivElement>(null);
+  const { scrollY } = useScrollPosition(mainPageContainerRef.current);
   if (apiGroupData) {
     return (
       <>
@@ -42,7 +48,7 @@ const Home: NextPage = () => {
           checkStatusInfo={[false, false, true]}
         /> */}
         </BottomSheet>
-        <StyledMainPageContainer>
+        <StyledMainPageContainer ref={mainPageContainerRef}>
           <AddChallengeButton
             onClick={(e: any) => {
               e.preventDefault();
@@ -58,16 +64,16 @@ const Home: NextPage = () => {
             <Calendar onDateChange={setSelectedDate} selectedDate={selectedDate} />
           </MainPageCalendarContaier>
           <MainPageChallengesContainer>
-            {apiGroupData.data?.group?.map((groupItem: any, index: any) => (
+            {apiGroupData.map((groupItem: any, index: any) => (
               <Challenge
                 onAreaClick={() => {
                   setIsShowing(true);
                 }}
                 key={index}
-                challengeTitle={groupItem.title}
-                description={groupItem.content}
-                members={groupItem.names}
-                category={groupItem.categoryId}
+                challengeTitle={groupItem.challengeTitle}
+                description={groupItem.description}
+                members={groupItem.members}
+                category={groupItem.category}
               />
             ))}
           </MainPageChallengesContainer>

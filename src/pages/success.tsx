@@ -5,9 +5,10 @@ import { ImageContainer } from "components/common/Container";
 import { motion } from "framer-motion";
 import { defaultFadeInVariants, staggerOne } from "styles/motions";
 
-import fighting from "../../images/fighting.svg";
 import { BoxStyle } from "../components/common/BlueBox";
 import { SubDescript, Title } from "../components/common/Description";
+
+import fighting from "/public/icons/fighting.svg";
 
 const FormContainer = styled(motion.form)`
   padding: 53px 16px;
