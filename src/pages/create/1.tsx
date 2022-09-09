@@ -5,6 +5,7 @@ import styled from "@emotion/styled";
 import { BlueGt } from "components/common/BlueGt";
 import { MoveContainer } from "components/common/Container";
 import { Title } from "components/common/Description";
+import StepIndicator from "components/pages/create/StepIndicator";
 import { FormContainer } from "components/pages/create/styles";
 import { intervalToDuration } from "date-fns";
 import { motion } from "framer-motion";
@@ -49,9 +50,7 @@ export default function SetDayPage() {
   return (
     <FormContainer variants={staggerOne} initial="initial" whileInView="animate" exit="exit">
       <MoveContainer>
-        <motion.span variants={defaultFadeInVariants}>
-          <b>1</b> / 4
-        </motion.span>
+        <StepIndicator currentStep={1} totalSteps={4} />
       </MoveContainer>
       <Title variants={defaultFadeInVariants}>
         미션 기간은

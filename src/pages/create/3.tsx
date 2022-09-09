@@ -6,8 +6,8 @@ import { MoveContainer } from "components/common/Container";
 import { Title } from "components/common/Description";
 import { StyledInput, StyledTextarea } from "components/common/Input/styles";
 import { RadioContainer } from "components/pages/create/3";
+import StepIndicator from "components/pages/create/StepIndicator";
 import { FormContainer, GobackAnchor, GroupDescription } from "components/pages/create/styles";
-import { motion } from "framer-motion";
 import { defaultFadeInVariants, staggerOne } from "styles/motions";
 
 import styles from "../../styles/radio.module.css";
@@ -38,9 +38,7 @@ export default function SetMission() {
             <Image alt={"back"} src={lPolygon} />
           </GobackAnchor>
         </Link>
-        <motion.span variants={defaultFadeInVariants}>
-          <b>3</b> / 4
-        </motion.span>
+        <StepIndicator currentStep={3} totalSteps={4} />
       </MoveContainer>
       <Title variants={defaultFadeInVariants}>
         미션에 대한

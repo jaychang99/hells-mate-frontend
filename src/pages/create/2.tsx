@@ -5,8 +5,8 @@ import { BlueGt } from "components/common/BlueGt";
 import { MoveContainer } from "components/common/Container";
 import { Title } from "components/common/Description";
 import { StyledInput, StyledTextarea } from "components/common/Input/styles";
+import StepIndicator from "components/pages/create/StepIndicator";
 import { FormContainer, GobackAnchor, GroupDescription } from "components/pages/create/styles";
-import { motion } from "framer-motion";
 import { defaultFadeInVariants, staggerOne } from "styles/motions";
 
 import lPolygon from "/public/icons/lPolygon.svg";
@@ -34,9 +34,7 @@ export default function SetGroupPage() {
             <Image alt={"back"} src={lPolygon} />
           </GobackAnchor>
         </Link>
-        <motion.span variants={defaultFadeInVariants}>
-          <b>2</b> / 4
-        </motion.span>
+        <StepIndicator currentStep={2} totalSteps={4} />
       </MoveContainer>
       <Title variants={defaultFadeInVariants}>
         그룹에 대한
