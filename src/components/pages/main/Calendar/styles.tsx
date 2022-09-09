@@ -11,6 +11,10 @@ export const StyledCalendar = styled.div`
   column-gap: 10px;
   padding: 2px; //스크롤바 때문에 잘리는 현상 대응.
   overflow-x: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const CalendarMonthSelectorMonthText = styled.div`

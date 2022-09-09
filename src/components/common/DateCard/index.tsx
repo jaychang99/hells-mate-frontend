@@ -1,4 +1,4 @@
-import { HTMLAttributes } from "react";
+import { forwardRef, HTMLAttributes } from "react";
 import {
   DateCardContentText,
   DateCardTitleText,
@@ -12,15 +12,28 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   isSelected: boolean;
 }
 
-function DateCard({ dateCardTitle, dateCardContent, isToday, isSelected, ...props }: Props) {
-  return (
-    <StyledDateCard isSelected={isSelected} {...props}>
-      <DateCardTitleText isSelected={isSelected} isToday={isToday}>
-        {dateCardTitle}
-      </DateCardTitleText>
-      <DateCardContentText isSelected={isSelected}>{dateCardContent}</DateCardContentText>
-    </StyledDateCard>
-  );
-}
+const DateCard = forwardRef<HTMLDivElement, Props>(
+  ({ dateCardTitle, dateCardContent, isToday, isSelected, ...props }, ref) => {
+    return (
+      <StyledDateCard isSelected={isSelected} {...props} ref={ref}>
+        <DateCardTitleText isSelected={isSelected} isToday={isToday}>
+          {dateCardTitle}
+        </DateCardTitleText>
+        <DateCardContentText isSelected={isSelected}>{dateCardContent}</DateCardContentText>
+      </StyledDateCard>
+    );
+  }
+);
+
+// function DateCard({ dateCardTitle, dateCardContent, isToday, isSelected, ...props }: Props) {
+//   return (
+//     <StyledDateCard isSelected={isSelected} {...props}>
+//       <DateCardTitleText isSelected={isSelected} isToday={isToday}>
+//         {dateCardTitle}
+//       </DateCardTitleText>
+//       <DateCardContentText isSelected={isSelected}>{dateCardContent}</DateCardContentText>
+//     </StyledDateCard>
+//   );
+// }
 
 export default DateCard;

@@ -11,10 +11,8 @@ function useScrollPosition(DOMelement: any | null) {
   useEffect(() => {
     function handleScroll() {
       setScrollData({ x: DOMelement.scrollLeft, y: DOMelement.scrollTop });
-      console.log("USESCROLL", scrollData);
     }
 
-    console.log(DOMelement);
     DOMelement?.addEventListener("scroll", handleScroll);
 
     return () => {

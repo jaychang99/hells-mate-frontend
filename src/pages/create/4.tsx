@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styled from "@emotion/styled";
 import { ImageContainer, MoveContainer } from "components/common/Container";
+import StepIndicator from "components/pages/create/StepIndicator";
 import { motion } from "framer-motion";
 import { defaultFadeInVariants, staggerOne } from "styles/motions";
 
@@ -50,9 +51,7 @@ export default function InvitePage() {
             <Image alt={"lPolygon"} src={lPolygon} />
           </Goback>
         </Link>
-        <motion.span variants={defaultFadeInVariants}>
-          <b>4</b> / 4
-        </motion.span>
+        <StepIndicator currentStep={4} totalSteps={4} />
       </MoveContainer>
       <Title variants={defaultFadeInVariants}>{headerText}</Title>
       <ImageContainer variants={defaultFadeInVariants}>
