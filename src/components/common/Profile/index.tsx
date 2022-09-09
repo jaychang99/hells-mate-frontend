@@ -43,7 +43,6 @@ function Profile({
           if (isClickable) {
             setIsShowing(true);
           }
-          // console.log(member.id, MOCKUP_MEMBERS[0].id);
         }}
       >
         <ProfilePictureBase>
