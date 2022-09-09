@@ -54,21 +54,27 @@ function Calendar({ selectedDate, onDateChange, ...props }: Props) {
   const populatedDateArray = populateDateArray(firstDayInThisMohth, lastDayInThisMonth);
 
   const currentDateCardRef = useRef<HTMLDivElement>();
+  // 월 전환 시 첫번째 날짜로 스크롤 시키기 위한 ref
+  const firstDateCardRef = useRef<HTMLDivElement>();
   const DummyRef = useRef<HTMLDivElement>();
 
-  const executeScroll = () => {
-    if (currentDateCardRef.current) {
-      scrollIntoView(currentDateCardRef.current, {
+  // 부득이 Generic 에 대한 추론 문제로 인해 any 사용..
+  // TODO: any 를 걷어내자...
+  function executeScroll(ref: any) {
+    if (ref.current) {
+      scrollIntoView(ref.current, {
         behavior: "smooth",
         block: "nearest",
         inline: "center",
       });
     }
-  };
+  }
 
   useEffect(() => {
     setTimeout(() => {
-      executeScroll();
+      if (currentDateCardRef.current) {
+        executeScroll(currentDateCardRef);
+      }
     }, 100);
   }, []);
 
@@ -80,7 +86,10 @@ function Calendar({ selectedDate, onDateChange, ...props }: Props) {
           src={arrowLeftIcon.src}
           width={30}
           height={30}
-          onClick={() => setCurrentDay(subMonths(currentDay, 1))}
+          onClick={() => {
+            setCurrentDay(subMonths(currentDay, 1));
+            executeScroll(firstDateCardRef);
+          }}
         />
         <CalendarMonthSelectorMonthText>
           {currentDay.getFullYear()}년 {currentDay.getMonth() + 1}월
@@ -90,17 +99,22 @@ function Calendar({ selectedDate, onDateChange, ...props }: Props) {
           src={arrowRightIcon.src}
           width={30}
           height={30}
-          onClick={() => setCurrentDay(addMonths(currentDay, 1))}
+          onClick={() => {
+            setCurrentDay(addMonths(currentDay, 1));
+            executeScroll(firstDateCardRef);
+          }}
         />
       </CalendarMonthSelectorContainer>
       <StyledCalendar>
         {populatedDateArray.map((date, index) => {
           const isToday = compareUTCYYYYDDMM(today, date);
+          const isFirstDay = compareUTCYYYYDDMM(firstDayInThisMohth, date);
+
           const isSelected = compareUTCYYYYDDMM(selectedDate, date);
 
           return (
             <DateCard
-              ref={isToday ? (currentDateCardRef as any) : DummyRef}
+              ref={isToday ? (currentDateCardRef as any) : isFirstDay ? firstDateCardRef : DummyRef}
               dateCardTitle={String(date.getUTCDate())}
               dateCardContent={DAY_LOOKUP_ARRAY[date.getUTCDay()]}
               isToday={isToday}
