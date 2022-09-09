@@ -12,7 +12,7 @@ export const StyledAddChallengeButton = styled.button`
   background-color: ${({ theme }) => theme.color.black500};
 
   /* position: fixed; */
-  z-index: 100;
+  z-index: 2;
   /* top: 200px; */
   /* left: 500px; */
   /* right: 16px;
