@@ -7,7 +7,7 @@ import { Title } from "components/common/Description";
 import { motion } from "framer-motion";
 import { defaultFadeInVariants, staggerOne } from "styles/motions";
 
-import letter from "../../images/letter.svg";
+import letter from "/public/icons/letter.svg";
 
 const FormContainer = styled(motion.form)`
   padding: 53px 16px;
