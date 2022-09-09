@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
+import { resetAnchorStyle } from "styles/utils/anchor";
 
-export const BlueGt = styled.div`
+export const StyledBlueNextAnchor = styled.a`
+  ${resetAnchorStyle}
   width: 56px;
   height: 56px;
   margin: 14px 0;

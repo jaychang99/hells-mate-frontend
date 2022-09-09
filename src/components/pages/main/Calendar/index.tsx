@@ -1,4 +1,4 @@
-import { Dispatch, HTMLAttributes, SetStateAction, useState } from "react";
+import { Dispatch, HTMLAttributes, SetStateAction, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import DateCard from "components/common/DateCard";
 import {
@@ -52,10 +52,27 @@ function Calendar({ selectedDate, onDateChange, ...props }: Props) {
 
   const populatedDateArray = populateDateArray(firstDayInThisMohth, lastDayInThisMonth);
 
+  const currentDateCardRef = useRef<HTMLDivElement>();
+  const DummyRef = useRef<HTMLDivElement>();
+
+  const executeScroll = () =>
+    currentDateCardRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
+    });
+
+  useEffect(() => {
+    setTimeout(() => {
+      executeScroll();
+    }, 100);
+  }, []);
+
   return (
     <div {...props}>
       <CalendarMonthSelectorContainer>
         <Image
+          alt="next_icon"
           src={arrowLeftIcon.src}
           width={30}
           height={30}
@@ -65,6 +82,7 @@ function Calendar({ selectedDate, onDateChange, ...props }: Props) {
           {currentDay.getFullYear()}년 {currentDay.getMonth() + 1}월
         </CalendarMonthSelectorMonthText>
         <Image
+          alt="previous_icon"
           src={arrowRightIcon.src}
           width={30}
           height={30}
@@ -72,19 +90,24 @@ function Calendar({ selectedDate, onDateChange, ...props }: Props) {
         />
       </CalendarMonthSelectorContainer>
       <StyledCalendar>
-        {populatedDateArray.map((date, index) => (
-          <DateCard
-            dateCardTitle={String(date.getUTCDate())}
-            dateCardContent={DAY_LOOKUP_ARRAY[date.getUTCDay()]}
-            isToday={compareUTCYYYYDDMM(today, date) ? true : false}
-            isSelected={compareUTCYYYYDDMM(selectedDate, date) ? true : false}
-            key={index}
-            onClick={() => {
-              onDateChange(date);
-              console.log("CLICKED");
-            }}
-          />
-        ))}
+        {populatedDateArray.map((date, index) => {
+          const isToday = compareUTCYYYYDDMM(today, date);
+          const isSelected = compareUTCYYYYDDMM(selectedDate, date);
+
+          return (
+            <DateCard
+              ref={isToday ? (currentDateCardRef as any) : DummyRef}
+              dateCardTitle={String(date.getUTCDate())}
+              dateCardContent={DAY_LOOKUP_ARRAY[date.getUTCDay()]}
+              isToday={isToday}
+              isSelected={isSelected}
+              key={index}
+              onClick={() => {
+                onDateChange(date);
+              }}
+            />
+          );
+        })}
       </StyledCalendar>
     </div>
   );

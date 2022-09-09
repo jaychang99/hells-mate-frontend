@@ -11,8 +11,11 @@ export const StyledBottomSheetResultSelectorItem = styled.div<StyleProps>`
   border-radius: 10px;
   padding: 13px;
   width: 100%;
-  outline: ${({ theme, isChecked }) =>
-    isChecked ? "1px solid " + theme.color.primary700 : "none"};
+  // 원래 outline 이었으나, 일부 mobile 브라우저에서 border 가 아닌 outline 에는
+  // border-radius 가 적용되지 않는 문제 때문에 box-shadow 로 대체
+  // 근본적인 해결책은 아님
+  box-shadow: 0 0 0
+    ${({ theme, isChecked }) => (isChecked ? "1px " + theme.color.primary700 : "none")};
   height: 50px;
 `;
 

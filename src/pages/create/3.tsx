@@ -1,20 +1,19 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { BlueGt } from "components/common/BlueGt";
+import BlueNextAnchor from "components/common/BlueNextAnchor";
 import { MoveContainer } from "components/common/Container";
 import { Title } from "components/common/Description";
 import { StyledInput, StyledTextarea } from "components/common/Input/styles";
 import { RadioContainer } from "components/pages/create/3";
+import StepIndicator from "components/pages/create/StepIndicator";
 import { FormContainer, GobackAnchor, GroupDescription } from "components/pages/create/styles";
-import { motion } from "framer-motion";
 import { defaultFadeInVariants, staggerOne } from "styles/motions";
 
 import styles from "../../styles/radio.module.css";
 
 import food from "/public/icons/food.svg";
 import lPolygon from "/public/icons/lPolygon.svg";
-import rPolygon from "/public/icons/rPolygon.svg";
 import run from "/public/icons/run.svg";
 
 export default function SetMission() {
@@ -38,9 +37,7 @@ export default function SetMission() {
             <Image alt={"back"} src={lPolygon} />
           </GobackAnchor>
         </Link>
-        <motion.span variants={defaultFadeInVariants}>
-          <b>3</b> / 4
-        </motion.span>
+        <StepIndicator currentStep={3} totalSteps={4} />
       </MoveContainer>
       <Title variants={defaultFadeInVariants}>
         미션에 대한
@@ -93,9 +90,7 @@ export default function SetMission() {
         placeholder="미션의 내용을 입력해주세요."
       />
       <Link href="/create/4" passHref>
-        <BlueGt>
-          <Image alt={"next"} src={rPolygon} />
-        </BlueGt>
+        <BlueNextAnchor />
       </Link>
     </FormContainer>
   );
