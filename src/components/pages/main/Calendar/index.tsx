@@ -9,6 +9,7 @@ import {
 import { addDays, addMonths, subDays, subMonths } from "date-fns";
 import getDaysInMonth from "date-fns/getDaysInMonth";
 import lastDayOfMonth from "date-fns/lastDayOfMonth";
+import { scrollIntoView } from "seamless-scroll-polyfill";
 
 import arrowLeftIcon from "/public/icons/arrow_left.svg";
 import arrowRightIcon from "/public/icons/arrow_right.svg";
@@ -55,12 +56,15 @@ function Calendar({ selectedDate, onDateChange, ...props }: Props) {
   const currentDateCardRef = useRef<HTMLDivElement>();
   const DummyRef = useRef<HTMLDivElement>();
 
-  const executeScroll = () =>
-    currentDateCardRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "nearest",
-      inline: "center",
-    });
+  const executeScroll = () => {
+    if (currentDateCardRef.current) {
+      scrollIntoView(currentDateCardRef.current, {
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center",
+      });
+    }
+  };
 
   useEffect(() => {
     setTimeout(() => {
