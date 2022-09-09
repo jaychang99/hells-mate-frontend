@@ -6,6 +6,7 @@ import BottomSheet from "components/common/ButtomSheet";
 import AddChallengeButton from "components/pages/main/AddChallengeButton";
 import Calendar from "components/pages/main/Calendar";
 import Challenge from "components/pages/main/Challenge";
+import { MainPageChallengeProvider } from "components/pages/main/contexts/MainPageChallengeContext";
 import Loading from "components/pages/main/Loading";
 import {
   MainPageCalendarContaier,
@@ -13,7 +14,6 @@ import {
   MainPageTopRowContainer,
   StyledMainPageContainer,
 } from "components/pages/main/styles";
-import useScrollPosition from "hooks/useScrollPosition";
 
 // import { useAxiosData } from "hooks/useAxiosData";
 import { MOCKUP_CHALLENGES } from "../mockups/challenges";
@@ -32,10 +32,9 @@ const Home: NextPage = () => {
   const [isShowing, setIsShowing] = useState(false);
 
   const mainPageContainerRef = useRef<HTMLDivElement>(null);
-  const { scrollY } = useScrollPosition(mainPageContainerRef.current);
   if (apiGroupData) {
     return (
-      <>
+      <MainPageChallengeProvider value={{ apiGroupData }}>
         <BottomSheet
           isShowing={isShowing}
           onClose={() => {
@@ -70,15 +69,12 @@ const Home: NextPage = () => {
                   setIsShowing(true);
                 }}
                 key={index}
-                challengeTitle={groupItem.challengeTitle}
-                description={groupItem.description}
-                members={groupItem.members}
-                category={groupItem.category}
+                {...groupItem}
               />
             ))}
           </MainPageChallengesContainer>
         </StyledMainPageContainer>
-      </>
+      </MainPageChallengeProvider>
     );
   } else {
     return <Loading />;
