@@ -1,19 +1,16 @@
 import { Dispatch, HTMLAttributes, SetStateAction, useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import DateCard from "components/common/DateCard";
+import StepIcon from "components/common/icons/StepIcon";
 import {
   CalendarMonthSelectorContainer,
   CalendarMonthSelectorMonthText,
   StyledCalendar,
 } from "components/pages/main/Calendar/styles";
-import { addDays, addMonths, subDays, subMonths } from "date-fns";
+import { addDays, subDays } from "date-fns";
 import getDaysInMonth from "date-fns/getDaysInMonth";
 import lastDayOfMonth from "date-fns/lastDayOfMonth";
 import { scrollIntoView } from "seamless-scroll-polyfill";
 import { compareUTCYYYYDDMM, populateDateArray } from "utils/calendar";
-
-import arrowLeftIcon from "/public/icons/arrow_left.svg";
-import arrowRightIcon from "/public/icons/arrow_right.svg";
 
 const DAY_LOOKUP_ARRAY = ["일", "월", "화", "수", "목", "금", "토"];
 
@@ -60,29 +57,11 @@ function Calendar({ selectedDate, onDateChange, ...props }: Props) {
   return (
     <div {...props}>
       <CalendarMonthSelectorContainer>
-        <Image
-          alt="next_icon"
-          src={arrowLeftIcon.src}
-          width={30}
-          height={30}
-          onClick={() => {
-            setCurrentDay(subMonths(currentDay, 1));
-            executeScroll(firstDateCardRef);
-          }}
-        />
+        <StepIcon variant="previous" />
         <CalendarMonthSelectorMonthText>
           {currentDay.getFullYear()}년 {currentDay.getMonth() + 1}월
         </CalendarMonthSelectorMonthText>
-        <Image
-          alt="previous_icon"
-          src={arrowRightIcon.src}
-          width={30}
-          height={30}
-          onClick={() => {
-            setCurrentDay(addMonths(currentDay, 1));
-            executeScroll(firstDateCardRef);
-          }}
-        />
+        <StepIcon variant="next" />
       </CalendarMonthSelectorContainer>
       <StyledCalendar>
         {populatedDateArray.map((date, index) => {
