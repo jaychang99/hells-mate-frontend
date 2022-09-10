@@ -1,11 +1,10 @@
-import { addDays, subDays } from "date-fns";
+import { addDays } from "date-fns";
 
 export function populateDateArray(startDate: Date, endDate: Date) {
-  let currentDate = subDays(startDate, 1);
   const populatedDateArray = [] as Date[];
-  while (currentDate.getDate() !== endDate.getDate()) {
-    populatedDateArray.push(currentDate);
-    currentDate = addDays(currentDate, 1);
+  while (startDate.getDate() !== endDate.getDate()) {
+    populatedDateArray.push(startDate);
+    startDate = addDays(startDate, 1);
   }
   populatedDateArray.push(endDate);
   return populatedDateArray;

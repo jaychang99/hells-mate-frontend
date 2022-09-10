@@ -6,7 +6,7 @@ import {
   CalendarMonthSelectorMonthText,
   StyledCalendar,
 } from "components/pages/main/Calendar/styles";
-import { addDays, subDays } from "date-fns";
+import { addHours, subDays } from "date-fns";
 import getDaysInMonth from "date-fns/getDaysInMonth";
 import lastDayOfMonth from "date-fns/lastDayOfMonth";
 import { utcToZonedTime } from "date-fns-tz";
@@ -14,6 +14,7 @@ import { scrollIntoView } from "seamless-scroll-polyfill";
 import { compareUTCYYYYDDMM, populateDateArray } from "utils/calendar";
 
 const DAY_LOOKUP_ARRAY = ["일", "월", "화", "수", "목", "금", "토"];
+const SEOUL_TIMEZONE_OFFSET = 9;
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   selectedDate: Date;
@@ -26,14 +27,16 @@ function Calendar({ selectedDate, onDateChange, ...props }: Props) {
 
   // 오늘이 속한 달의 날 개수
   const daysInThisMonth = getDaysInMonth(today);
+  console.log("DAYSINTHISMONTH", daysInThisMonth);
 
   // 오늘이 속한 달의 마지막 날
-  const lastDayInThisMonth = addDays(lastDayOfMonth(today), 1);
+  const lastDayInThisMonth = lastDayOfMonth(today);
   console.log("LASTDAYINTHISMONTH", lastDayInThisMonth);
-  const firstDayInThisMohth = subDays(lastDayInThisMonth, daysInThisMonth - 2);
+  const firstDayInThisMohth = subDays(lastDayInThisMonth, daysInThisMonth - 1);
+  console.log("FIRSTDAYINTHISMONTH", firstDayInThisMohth);
 
   const populatedDateArray = populateDateArray(firstDayInThisMohth, lastDayInThisMonth);
-
+  console.log("POPULATEDDATEARRAY", populatedDateArray);
   const currentDateCardRef = useRef<HTMLDivElement>();
   // 월 전환 시 첫번째 날짜로 스크롤 시키기 위한 ref
   const firstDateCardRef = useRef<HTMLDivElement>();
@@ -74,12 +77,12 @@ function Calendar({ selectedDate, onDateChange, ...props }: Props) {
           const isFirstDay = compareUTCYYYYDDMM(firstDayInThisMohth, date);
 
           const isSelected = compareUTCYYYYDDMM(selectedDate, date);
-
+          const utcAdjustedDate = addHours(date, SEOUL_TIMEZONE_OFFSET);
           return (
             <DateCard
               ref={isToday ? (currentDateCardRef as any) : isFirstDay ? firstDateCardRef : DummyRef}
-              dateCardTitle={String(date.getUTCDate())}
-              dateCardContent={DAY_LOOKUP_ARRAY[date.getUTCDay()]}
+              dateCardTitle={String(utcAdjustedDate.getUTCDate())}
+              dateCardContent={DAY_LOOKUP_ARRAY[utcAdjustedDate.getUTCDay()]}
               isToday={isToday}
               isSelected={isSelected}
               key={index}
