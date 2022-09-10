@@ -1,4 +1,4 @@
-import { Dispatch, HTMLAttributes, SetStateAction, useEffect, useRef, useState } from "react";
+import { Dispatch, HTMLAttributes, SetStateAction, useEffect, useRef } from "react";
 import DateCard from "components/common/DateCard";
 import StepIcon from "components/common/icons/StepIcon";
 import {
@@ -21,11 +21,15 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 }
 
 function Calendar({ selectedDate, onDateChange, ...props }: Props) {
+  // TODO: 클라이언트의 time zone 에 따라 다르게 표시하는 기능, 현재로는 대한민국/서울로 고정
   const today = utcToZonedTime(new Date(), "Asia/Seoul");
-  const [currentDay, setCurrentDay] = useState(today); // 오늘
-  const [currentMonth, setCurrentMonth] = useState(currentDay.getMonth());
-  const daysInThisMonth = getDaysInMonth(currentDay); // 오늘이 속한 달의 날 개수
-  const lastDayInThisMonth = addDays(lastDayOfMonth(currentDay), 1); // 오늘이 속한 달의 마지막 날
+
+  // 오늘이 속한 달의 날 개수
+  const daysInThisMonth = getDaysInMonth(today);
+
+  // 오늘이 속한 달의 마지막 날
+  const lastDayInThisMonth = addDays(lastDayOfMonth(today), 1);
+  console.log("LASTDAYINTHISMONTH", lastDayInThisMonth);
   const firstDayInThisMohth = subDays(lastDayInThisMonth, daysInThisMonth - 2);
 
   const populatedDateArray = populateDateArray(firstDayInThisMohth, lastDayInThisMonth);
@@ -60,7 +64,7 @@ function Calendar({ selectedDate, onDateChange, ...props }: Props) {
       <CalendarMonthSelectorContainer>
         <StepIcon variant="previous" />
         <CalendarMonthSelectorMonthText>
-          {currentDay.getFullYear()}년 {currentDay.getMonth() + 1}월
+          {today.getFullYear()}년 {today.getMonth() + 1}월
         </CalendarMonthSelectorMonthText>
         <StepIcon variant="next" />
       </CalendarMonthSelectorContainer>
