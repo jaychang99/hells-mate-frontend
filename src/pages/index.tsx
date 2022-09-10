@@ -40,9 +40,7 @@ const Home: NextPage = () => {
               e.preventDefault();
               Router.push("/create/1");
             }}
-          >
-            +
-          </AddChallengeButton>
+          />
           <MainPageTopRowContainer>
             <RankingIcon />
           </MainPageTopRowContainer>
