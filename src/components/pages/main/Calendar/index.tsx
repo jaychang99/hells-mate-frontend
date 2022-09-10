@@ -9,6 +9,7 @@ import {
 import { addDays, subDays } from "date-fns";
 import getDaysInMonth from "date-fns/getDaysInMonth";
 import lastDayOfMonth from "date-fns/lastDayOfMonth";
+import { utcToZonedTime } from "date-fns-tz";
 import { scrollIntoView } from "seamless-scroll-polyfill";
 import { compareUTCYYYYDDMM, populateDateArray } from "utils/calendar";
 
@@ -20,7 +21,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 }
 
 function Calendar({ selectedDate, onDateChange, ...props }: Props) {
-  const today = new Date();
+  const today = utcToZonedTime(new Date(), "Asia/Seoul");
   const [currentDay, setCurrentDay] = useState(today); // 오늘
   const [currentMonth, setCurrentMonth] = useState(currentDay.getMonth());
   const daysInThisMonth = getDaysInMonth(currentDay); // 오늘이 속한 달의 날 개수
