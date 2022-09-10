@@ -9,7 +9,7 @@ import Challenge from "components/pages/main/Challenge";
 import { MainPageChallengeProvider } from "components/pages/main/contexts/MainPageChallengeContext";
 import Loading from "components/pages/main/Loading";
 import {
-  MainPageCalendarContaier,
+  MainPageCalendarContainer,
   MainPageChallengesContainer,
   MainPageTopRowContainer,
 } from "components/pages/main/styles";
@@ -44,9 +44,9 @@ const Home: NextPage = () => {
           <MainPageTopRowContainer>
             <RankingIcon />
           </MainPageTopRowContainer>
-          <MainPageCalendarContaier>
+          <MainPageCalendarContainer>
             <Calendar onDateChange={setSelectedDate} selectedDate={selectedDate} />
-          </MainPageCalendarContaier>
+          </MainPageCalendarContainer>
           <MainPageChallengesContainer>
             {apiGroupData.map((groupItem: any, index: any) => (
               <Challenge key={index} {...groupItem} />
