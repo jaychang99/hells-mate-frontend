@@ -1,12 +1,21 @@
-import { Dispatch, HTMLAttributes, SetStateAction, useEffect, useRef } from "react";
+import {
+  Dispatch,
+  FormEvent,
+  HTMLAttributes,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import DateCard from "components/common/DateCard";
 import StepIcon from "components/common/icons/StepIcon";
 import {
   CalendarMonthSelectorContainer,
   CalendarMonthSelectorMonthText,
+  StepIconButton,
   StyledCalendar,
 } from "components/pages/main/Calendar/styles";
-import { addHours, subDays } from "date-fns";
+import { addHours, addMonths, subDays, subMonths } from "date-fns";
 import getDaysInMonth from "date-fns/getDaysInMonth";
 import lastDayOfMonth from "date-fns/lastDayOfMonth";
 import { utcToZonedTime } from "date-fns-tz";
@@ -24,19 +33,20 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 function Calendar({ selectedDate, onDateChange, ...props }: Props) {
   // TODO: 클라이언트의 time zone 에 따라 다르게 표시하는 기능, 현재로는 대한민국/서울로 고정
   const today = utcToZonedTime(new Date(), "Asia/Seoul");
-
+  const [currentDay, setCurrentDay] = useState(today); // 오늘
+  const [currentMonth, setCurrentMonth] = useState(
+    addHours(today, SEOUL_TIMEZONE_OFFSET).getUTCMonth()
+  );
   // 오늘이 속한 달의 날 개수
-  const daysInThisMonth = getDaysInMonth(today);
-  console.log("DAYSINTHISMONTH", daysInThisMonth);
+  const daysInThisMonth = getDaysInMonth(currentDay);
 
   // 오늘이 속한 달의 마지막 날
-  const lastDayInThisMonth = lastDayOfMonth(today);
-  console.log("LASTDAYINTHISMONTH", lastDayInThisMonth);
+  const lastDayInThisMonth = lastDayOfMonth(currentDay);
+
   const firstDayInThisMohth = subDays(lastDayInThisMonth, daysInThisMonth - 1);
-  console.log("FIRSTDAYINTHISMONTH", firstDayInThisMohth);
 
   const populatedDateArray = populateDateArray(firstDayInThisMohth, lastDayInThisMonth);
-  console.log("POPULATEDDATEARRAY", populatedDateArray);
+
   const currentDateCardRef = useRef<HTMLDivElement>();
   // 월 전환 시 첫번째 날짜로 스크롤 시키기 위한 ref
   const firstDateCardRef = useRef<HTMLDivElement>();
@@ -62,14 +72,29 @@ function Calendar({ selectedDate, onDateChange, ...props }: Props) {
     }, 100);
   }, []);
 
+  function handlePreviousMonth(e: FormEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    setCurrentDay(subMonths(currentDay, 1));
+    executeScroll(firstDateCardRef);
+  }
+  function handleNextMonth(e: FormEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    setCurrentDay(addMonths(currentDay, 1));
+    executeScroll(firstDateCardRef);
+  }
+
   return (
     <div {...props}>
       <CalendarMonthSelectorContainer>
-        <StepIcon variant="previous" />
+        <StepIconButton onClick={handlePreviousMonth}>
+          <StepIcon variant="previous" />
+        </StepIconButton>
         <CalendarMonthSelectorMonthText>
-          {today.getFullYear()}년 {today.getMonth() + 1}월
+          {currentDay.getFullYear()}년 {currentDay.getMonth() + 1}월
         </CalendarMonthSelectorMonthText>
-        <StepIcon variant="next" />
+        <StepIconButton onClick={handleNextMonth}>
+          <StepIcon variant="next" />
+        </StepIconButton>
       </CalendarMonthSelectorContainer>
       <StyledCalendar>
         {populatedDateArray.map((date, index) => {
