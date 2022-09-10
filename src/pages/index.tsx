@@ -30,9 +30,6 @@ const Home: NextPage = () => {
   // Calendar 상태 관리
   const [selectedDate, setSelectedDate] = useState(new Date());
 
-  // BottomSheet 오픈 상태 관리
-  const [isShowing, setIsShowing] = useState(false);
-
   // TODO: useSWR 로 대체 예정
   if (apiGroupData) {
     return (
@@ -54,13 +51,7 @@ const Home: NextPage = () => {
           </MainPageCalendarContaier>
           <MainPageChallengesContainer>
             {apiGroupData.map((groupItem: any, index: any) => (
-              <Challenge
-                onAreaClick={() => {
-                  setIsShowing(true);
-                }}
-                key={index}
-                {...groupItem}
-              />
+              <Challenge key={index} {...groupItem} />
             ))}
           </MainPageChallengesContainer>
         </PageLayout>
