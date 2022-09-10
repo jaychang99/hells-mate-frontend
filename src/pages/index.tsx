@@ -1,8 +1,7 @@
 import { useState } from "react";
 import type { NextPage } from "next";
-import Image from "next/image";
 import Router from "next/router";
-import BottomSheet from "components/common/ButtomSheet";
+import RankingIcon from "components/common/icons/RankingIcon";
 import PageLayout from "components/common/Layout/PageLayout";
 import AddChallengeButton from "components/pages/main/AddChallengeButton";
 import Calendar from "components/pages/main/Calendar";
@@ -18,34 +17,26 @@ import {
 // import { useAxiosData } from "hooks/useAxiosData";
 import { MOCKUP_CHALLENGES } from "../mockups/challenges";
 
-import rankingIcon from "/public/icons/ranking_icon.svg";
-
 declare global {
   interface Window {
     Kakao: any;
   }
 }
 const Home: NextPage = () => {
-  const apiGroupData: any = MOCKUP_CHALLENGES;
+  // challenge 관련 데이터
+  // TODO: backend 연결 시 useAxiosData 로 변경하여 데이터 fetching 바람
+  const apiGroupData = MOCKUP_CHALLENGES;
 
+  // Calendar 상태 관리
   const [selectedDate, setSelectedDate] = useState(new Date());
+
+  // BottomSheet 오픈 상태 관리
   const [isShowing, setIsShowing] = useState(false);
 
+  // TODO: useSWR 로 대체 예정
   if (apiGroupData) {
     return (
       <MainPageChallengeProvider value={{ apiGroupData }}>
-        <BottomSheet
-          isShowing={isShowing}
-          onClose={() => {
-            setIsShowing(false);
-          }}
-        >
-          {/* <MainPageBottomSheetSection
-          member={MOCKUP_MEMBERS[0]}
-          currentUser={MOCKUP_MEMBERS[0]}
-          checkStatusInfo={[false, false, true]}
-        /> */}
-        </BottomSheet>
         <PageLayout>
           <AddChallengeButton
             onClick={(e: any) => {
@@ -56,7 +47,7 @@ const Home: NextPage = () => {
             +
           </AddChallengeButton>
           <MainPageTopRowContainer>
-            <Image alt="ranking icon" src={rankingIcon.src} width={20} height={27} />
+            <RankingIcon />
           </MainPageTopRowContainer>
           <MainPageCalendarContaier>
             <Calendar onDateChange={setSelectedDate} selectedDate={selectedDate} />
