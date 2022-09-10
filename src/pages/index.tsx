@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useCallback, useState } from "react";
 import type { NextPage } from "next";
 import Router from "next/router";
 import RankingIcon from "components/common/icons/RankingIcon";
@@ -30,17 +30,17 @@ const Home: NextPage = () => {
   // Calendar 상태 관리
   const [selectedDate, setSelectedDate] = useState(new Date());
 
+  const gotoAddChallengePage = useCallback((e: FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    Router.push("/create/1");
+  }, []);
+
   // TODO: useSWR 로 대체 예정
   if (apiGroupData) {
     return (
       <MainPageChallengeProvider value={{ apiGroupData }}>
         <PageLayout>
-          <AddChallengeButton
-            onClick={(e: any) => {
-              e.preventDefault();
-              Router.push("/create/1");
-            }}
-          />
+          <AddChallengeButton onClick={gotoAddChallengePage} />
           <MainPageTopRowContainer>
             <RankingIcon />
           </MainPageTopRowContainer>
