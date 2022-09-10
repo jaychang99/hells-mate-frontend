@@ -1,12 +1,5 @@
 import styled from "@emotion/styled";
 
-export const StyledMainPageContainer = styled.div`
-  background-color: ${({ theme }) => theme.color.background};
-  padding: 50px 16px 16px;
-  overflow-y: scroll;
-  position: relative;
-`;
-
 export const MainPageTopRowContainer = styled.div`
   display: flex;
   justify-content: flex-end;

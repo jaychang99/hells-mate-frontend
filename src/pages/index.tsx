@@ -1,8 +1,9 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import type { NextPage } from "next";
 import Image from "next/image";
 import Router from "next/router";
 import BottomSheet from "components/common/ButtomSheet";
+import PageLayout from "components/common/Layout/PageLayout";
 import AddChallengeButton from "components/pages/main/AddChallengeButton";
 import Calendar from "components/pages/main/Calendar";
 import Challenge from "components/pages/main/Challenge";
@@ -12,7 +13,6 @@ import {
   MainPageCalendarContaier,
   MainPageChallengesContainer,
   MainPageTopRowContainer,
-  StyledMainPageContainer,
 } from "components/pages/main/styles";
 
 // import { useAxiosData } from "hooks/useAxiosData";
@@ -31,7 +31,6 @@ const Home: NextPage = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [isShowing, setIsShowing] = useState(false);
 
-  const mainPageContainerRef = useRef<HTMLDivElement>(null);
   if (apiGroupData) {
     return (
       <MainPageChallengeProvider value={{ apiGroupData }}>
@@ -47,7 +46,7 @@ const Home: NextPage = () => {
           checkStatusInfo={[false, false, true]}
         /> */}
         </BottomSheet>
-        <StyledMainPageContainer ref={mainPageContainerRef}>
+        <PageLayout>
           <AddChallengeButton
             onClick={(e: any) => {
               e.preventDefault();
@@ -73,7 +72,7 @@ const Home: NextPage = () => {
               />
             ))}
           </MainPageChallengesContainer>
-        </StyledMainPageContainer>
+        </PageLayout>
       </MainPageChallengeProvider>
     );
   } else {
