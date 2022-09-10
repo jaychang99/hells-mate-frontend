@@ -3,7 +3,7 @@ import type { NextPage } from "next";
 import Router from "next/router";
 import RankingIcon from "components/common/icons/RankingIcon";
 import PageLayout from "components/common/Layout/PageLayout";
-import AddChallengeButton from "components/pages/main/AddChallengeButton";
+import AddChallengeAnchor from "components/pages/main/AddChallengeAnchor";
 import Calendar from "components/pages/main/Calendar";
 import Challenge from "components/pages/main/Challenge";
 import { MainPageChallengeProvider } from "components/pages/main/contexts/MainPageChallengeContext";
@@ -30,7 +30,7 @@ const Home: NextPage = () => {
   // Calendar 상태 관리
   const [selectedDate, setSelectedDate] = useState(new Date());
 
-  const gotoAddChallengePage = useCallback((e: FormEvent<HTMLButtonElement>) => {
+  const gotoAddChallengePage = useCallback((e: FormEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     Router.push("/create/1");
   }, []);
@@ -40,7 +40,7 @@ const Home: NextPage = () => {
     return (
       <MainPageChallengeProvider value={{ apiGroupData }}>
         <PageLayout>
-          <AddChallengeButton onClick={gotoAddChallengePage} />
+          <AddChallengeAnchor onClick={gotoAddChallengePage} />
           <MainPageTopRowContainer>
             <RankingIcon />
           </MainPageTopRowContainer>
