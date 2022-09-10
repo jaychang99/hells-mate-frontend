@@ -10,31 +10,10 @@ import { addDays, addMonths, subDays, subMonths } from "date-fns";
 import getDaysInMonth from "date-fns/getDaysInMonth";
 import lastDayOfMonth from "date-fns/lastDayOfMonth";
 import { scrollIntoView } from "seamless-scroll-polyfill";
+import { compareUTCYYYYDDMM, populateDateArray } from "utils/calendar";
 
 import arrowLeftIcon from "/public/icons/arrow_left.svg";
 import arrowRightIcon from "/public/icons/arrow_right.svg";
-
-function populateDateArray(startDate: Date, endDate: Date) {
-  let currentDate = subDays(startDate, 1);
-  const populatedDateArray = [] as Date[];
-  while (currentDate.getDate() !== endDate.getDate()) {
-    populatedDateArray.push(currentDate);
-    currentDate = addDays(currentDate, 1);
-  }
-  populatedDateArray.push(endDate);
-  return populatedDateArray;
-}
-
-function compareUTCYYYYDDMM(date1: Date, date2: Date) {
-  if (date1.getUTCFullYear() === date2.getUTCFullYear()) {
-    if (date1.getUTCMonth() === date2.getUTCMonth()) {
-      if (date1.getUTCDate() === date2.getUTCDate()) {
-        return true;
-      }
-    }
-  }
-  return false;
-}
 
 const DAY_LOOKUP_ARRAY = ["일", "월", "화", "수", "목", "금", "토"];
 
