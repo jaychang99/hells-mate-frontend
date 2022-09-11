@@ -1,4 +1,15 @@
-import { addDays } from "date-fns";
+import { addDays, getDaysInMonth, lastDayOfMonth, subDays } from "date-fns";
+
+export function getThisMonthData(currentDay: Date) {
+  // 오늘이 속한 달의 날 개수
+  const daysInThisMonth = getDaysInMonth(currentDay);
+
+  // 오늘이 속한 달의 마지막 날
+  const lastDayInThisMonth = lastDayOfMonth(currentDay);
+  const firstDayInThisMonth = subDays(lastDayInThisMonth, daysInThisMonth - 1);
+
+  return { firstDayInThisMonth, lastDayInThisMonth, daysInThisMonth };
+}
 
 export function populateDateArray(startDate: Date, endDate: Date) {
   const populatedDateArray = [] as Date[];

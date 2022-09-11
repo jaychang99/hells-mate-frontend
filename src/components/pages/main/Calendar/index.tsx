@@ -16,12 +16,10 @@ import {
   StyledCalendar,
 } from "components/pages/main/Calendar/styles";
 import { DAY_LOOKUP_ARRAY, SEOUL_TIMEZONE_OFFSET } from "constants/date";
-import { addHours, addMonths, subDays, subMonths } from "date-fns";
-import getDaysInMonth from "date-fns/getDaysInMonth";
-import lastDayOfMonth from "date-fns/lastDayOfMonth";
+import { addHours, addMonths, subMonths } from "date-fns";
 import { utcToZonedTime } from "date-fns-tz";
 import { scrollIntoView } from "seamless-scroll-polyfill";
-import { compareUTCYYYYDDMM, populateDateArray } from "utils/calendar";
+import { compareUTCYYYYDDMM, getThisMonthData, populateDateArray } from "utils/calendar";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   selectedDate: Date;
@@ -32,18 +30,10 @@ function Calendar({ selectedDate, onDateChange, ...props }: Props) {
   // TODO: 클라이언트의 time zone 에 따라 다르게 표시하는 기능, 현재로는 대한민국/서울로 고정
   const today = utcToZonedTime(new Date(), "Asia/Seoul");
   const [currentDay, setCurrentDay] = useState(today); // 오늘
-  const [currentMonth, setCurrentMonth] = useState(
-    addHours(today, SEOUL_TIMEZONE_OFFSET).getUTCMonth()
-  );
-  // 오늘이 속한 달의 날 개수
-  const daysInThisMonth = getDaysInMonth(currentDay);
 
-  // 오늘이 속한 달의 마지막 날
-  const lastDayInThisMonth = lastDayOfMonth(currentDay);
+  const { firstDayInThisMonth, lastDayInThisMonth } = getThisMonthData(currentDay);
 
-  const firstDayInThisMohth = subDays(lastDayInThisMonth, daysInThisMonth - 1);
-
-  const populatedDateArray = populateDateArray(firstDayInThisMohth, lastDayInThisMonth);
+  const populatedDateArray = populateDateArray(firstDayInThisMonth, lastDayInThisMonth);
 
   const currentDateCardRef = useRef<HTMLDivElement>();
   // 월 전환 시 첫번째 날짜로 스크롤 시키기 위한 ref
@@ -62,23 +52,30 @@ function Calendar({ selectedDate, onDateChange, ...props }: Props) {
     }
   }
 
-  useEffect(() => {
+  function delayedExecuteScroll() {
     setTimeout(() => {
       if (currentDateCardRef.current) {
         executeScroll(currentDateCardRef);
       }
     }, 100);
+  }
+
+  useEffect(() => {
+    delayedExecuteScroll();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  function handlePreviousMonth(e: FormEvent<HTMLButtonElement>) {
+  function handleMonthChange(e: FormEvent<HTMLButtonElement>, variant: "previous" | "next") {
     e.preventDefault();
-    setCurrentDay(subMonths(currentDay, 1));
+    setCurrentDay(variant === "previous" ? subMonths(currentDay, 1) : addMonths(currentDay, 1));
     executeScroll(firstDateCardRef);
   }
+
+  function handlePreviousMonth(e: FormEvent<HTMLButtonElement>) {
+    handleMonthChange(e, "previous");
+  }
   function handleNextMonth(e: FormEvent<HTMLButtonElement>) {
-    e.preventDefault();
-    setCurrentDay(addMonths(currentDay, 1));
-    executeScroll(firstDateCardRef);
+    handleMonthChange(e, "next");
   }
 
   return (
@@ -97,7 +94,7 @@ function Calendar({ selectedDate, onDateChange, ...props }: Props) {
       <StyledCalendar>
         {populatedDateArray.map((date, index) => {
           const isToday = compareUTCYYYYDDMM(today, date);
-          const isFirstDay = compareUTCYYYYDDMM(firstDayInThisMohth, date);
+          const isFirstDay = compareUTCYYYYDDMM(firstDayInThisMonth, date);
 
           const isSelected = compareUTCYYYYDDMM(selectedDate, date);
           const utcAdjustedDate = addHours(date, SEOUL_TIMEZONE_OFFSET);
