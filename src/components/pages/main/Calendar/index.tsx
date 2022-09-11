@@ -15,15 +15,13 @@ import {
   StepIconButton,
   StyledCalendar,
 } from "components/pages/main/Calendar/styles";
+import { DAY_LOOKUP_ARRAY, SEOUL_TIMEZONE_OFFSET } from "constants/date";
 import { addHours, addMonths, subDays, subMonths } from "date-fns";
 import getDaysInMonth from "date-fns/getDaysInMonth";
 import lastDayOfMonth from "date-fns/lastDayOfMonth";
 import { utcToZonedTime } from "date-fns-tz";
 import { scrollIntoView } from "seamless-scroll-polyfill";
 import { compareUTCYYYYDDMM, populateDateArray } from "utils/calendar";
-
-const DAY_LOOKUP_ARRAY = ["일", "월", "화", "수", "목", "금", "토"];
-const SEOUL_TIMEZONE_OFFSET = 9;
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   selectedDate: Date;
