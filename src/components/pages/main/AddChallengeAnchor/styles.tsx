@@ -1,9 +1,11 @@
 import styled from "@emotion/styled";
+import { resetAnchorStyle } from "styles/utils/anchor";
 
-import { resetButtonStyle } from "../../../../styles/utils/button";
-
-export const StyledAddChallengeButton = styled.button`
-  ${resetButtonStyle}
+export const StyledAddChallengeAnchor = styled.a`
+  ${resetAnchorStyle}
+  display:flex;
+  align-items: center;
+  justify-content: center;
   width: 60px;
   height: 60px;
   border-radius: 30px;

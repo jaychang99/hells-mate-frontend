@@ -61,7 +61,7 @@ export default function InvitePage() {
         <BlueBox
           onClick={(e) => {
             e.preventDefault();
-            navigator.clipboard.writeText("http://localhost:3000/receive/1");
+            navigator.clipboard.writeText("http://www.hellsmate.com/receive/1");
             setHeaderText("복사되었습니다!");
           }}
           variants={defaultFadeInVariants}
