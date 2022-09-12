@@ -11,9 +11,10 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   members: Member[];
   challengeTitle: string;
   description: string;
+  category: number;
 }
 
-function ChallengeProfile({ members, challengeTitle, description, ...props }: Props) {
+function ChallengeProfile({ members, challengeTitle, description, category, ...props }: Props) {
   const [processedMembers, setProcessedMembers] = useState(
     members?.length > 3 ? members.slice(0, 2) : members
   );
@@ -33,6 +34,7 @@ function ChallengeProfile({ members, challengeTitle, description, ...props }: Pr
           member={member}
           key={index}
           checkStatusInfo={[true, false, false]}
+          category={category}
         />
       ))}
       {isMoreButton && (

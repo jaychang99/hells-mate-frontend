@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { resetButtonStyle } from "styles/utils/button";
 
 export const CalendarMonthSelectorContainer = styled.div`
   display: flex;
@@ -21,4 +22,8 @@ export const CalendarMonthSelectorMonthText = styled.div`
   font-size: 24px;
   font-weight: 700;
   color: ${({ theme }) => theme.color.black900};
+`;
+
+export const StepIconButton = styled.button`
+  ${resetButtonStyle}
 `;

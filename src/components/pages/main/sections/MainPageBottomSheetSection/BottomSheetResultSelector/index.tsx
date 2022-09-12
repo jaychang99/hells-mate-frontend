@@ -22,6 +22,7 @@ function BottomSheetResultSelector({ member, isOwner, checkStatusInfo, ...props 
         isClickable={false}
         member={member}
         checkStatusInfo={[false, true, false]}
+        category={0}
       />
       <SelectorItemContainer>
         <BottomSheetResultSelectorItem

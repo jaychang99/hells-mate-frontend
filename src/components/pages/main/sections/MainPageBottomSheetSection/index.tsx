@@ -14,6 +14,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   checkStatusInfo: boolean[];
   challengeTitle: string;
   description: string;
+  category: number;
 }
 
 function MainPageBottomSheetSection({
@@ -22,6 +23,7 @@ function MainPageBottomSheetSection({
   checkStatusInfo,
   challengeTitle,
   description,
+  category,
   ...props
 }: Props) {
   return (
@@ -30,7 +32,7 @@ function MainPageBottomSheetSection({
         challengeTitle={challengeTitle}
         description={description}
         onAreaClick={() => {}}
-        category={1}
+        category={category}
         members={[member]}
       />
       <BottomSheetResultSelector

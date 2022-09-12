@@ -20,6 +20,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   challengeTitle: string;
   description: string;
   isClickable?: boolean;
+  category: number;
 }
 
 function Profile({
@@ -29,6 +30,7 @@ function Profile({
   challengeTitle,
   description,
   isClickable = true,
+  category,
   ...props
 }: Props) {
   const [isShowing, setIsShowing] = useState(false);
@@ -61,6 +63,7 @@ function Profile({
           member={member}
           currentUser={{ id: 1, nickname: "서하서하", profilesrc: null }}
           checkStatusInfo={checkStatusInfo}
+          category={category}
         />
       </BottomSheet>
 
