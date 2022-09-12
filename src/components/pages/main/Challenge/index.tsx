@@ -64,6 +64,7 @@ function Challenge({
               <ChallengeDescriptionText>{description}</ChallengeDescriptionText>
             </div>
             <ChallengeProfile
+              category={category}
               members={members}
               challengeTitle={challengeTitle}
               description={description}
