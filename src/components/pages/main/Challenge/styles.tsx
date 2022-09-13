@@ -10,6 +10,7 @@ export const StyledChallenge = styled.div`
   background-color: ${({ theme }) => theme.color.white};
 
   box-shadow: 0px 2px 8px rgba(95, 123, 255, 0.25);
+  width: 328px;
 `;
 
 export const FlexColumn = styled.div``;
