@@ -13,7 +13,7 @@ export const MainPageTopRowContainer = styled.div`
   justify-content: flex-end;
 `;
 
-export const MainPageCalendarContaier = styled.div`
+export const MainPageCalendarContainer = styled.div`
   margin-bottom: 48px;
 `;
 
