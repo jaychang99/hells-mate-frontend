@@ -45,12 +45,6 @@ function Profile({
         onClick={() => {
           if (isClickable) {
             setIsShowing(true);
-            // if (dataLayer) {
-            //   console.log("EXISTS");
-            // } else {
-            //   console.log("NOOP");
-            // }
-            // gtag.dataLayer.push({ event: "add_clicked" });
             gtag.event({
               action: "view_item",
               category: "engagement",
