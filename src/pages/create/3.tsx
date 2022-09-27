@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import BlueNextAnchor from "components/common/BlueNextAnchor";
@@ -19,6 +19,19 @@ import run from "/public/icons/run.svg";
 export default function SetMission() {
   const [mission, setMission] = useState("");
   const [aboutMission, setAboutMission] = useState("");
+
+  const missionTypeRef = useRef<HTMLInputElement>(null);
+  const missionTitleRef = useRef<HTMLInputElement>(null);
+  const missionDescriptionRef = useRef<HTMLTextAreaElement>(null);
+
+  const handleMissionInfo = useCallback(async () => {
+    localStorage.setItem("missionType", missionTypeRef.current?.value || "work");
+    localStorage.setItem("missionTitle", missionTitleRef.current?.value || "기본값 미션제목");
+    localStorage.setItem(
+      "missionDescription",
+      missionDescriptionRef.current?.value || "기본값 미션설명"
+    );
+  }, []);
 
   const onMission = (e: any) => {
     setMission(e.currentTarget.value);
@@ -59,6 +72,7 @@ export default function SetMission() {
           식이 조절
         </label>
         <input
+          // ref={missionTypeRef}
           className={styles.radio}
           type="radio"
           id="work"
@@ -75,6 +89,7 @@ export default function SetMission() {
         미션의 제목을 입력해주세요.
       </GroupDescription>
       <StyledInput
+        ref={missionTitleRef}
         variants={defaultFadeInVariants}
         onChange={onMission}
         value={mission}
@@ -84,13 +99,14 @@ export default function SetMission() {
         미션의 내용을 입력해주세요.
       </GroupDescription>
       <StyledTextarea
+        ref={missionDescriptionRef}
         value={aboutMission}
         onChange={onAboutMission}
         variants={defaultFadeInVariants}
         placeholder="미션의 내용을 입력해주세요."
       />
       <Link href="/create/4" passHref>
-        <BlueNextAnchor />
+        <BlueNextAnchor onClick={handleMissionInfo} />
       </Link>
     </FormContainer>
   );
