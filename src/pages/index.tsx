@@ -1,11 +1,11 @@
 import { FormEvent, useCallback, useState } from "react";
 import type { NextPage } from "next";
+import dynamic from "next/dynamic";
 import Router from "next/router";
 import RankingIcon from "components/common/icons/RankingIcon";
 import PageLayout from "components/common/Layout/PageLayout";
 import AddChallengeAnchor from "components/pages/main/AddChallengeAnchor";
 import Calendar from "components/pages/main/Calendar";
-import Challenge from "components/pages/main/Challenge";
 import { MainPageChallengeProvider } from "components/pages/main/contexts/MainPageChallengeContext";
 import Loading from "components/pages/main/Loading";
 import {
@@ -23,6 +23,8 @@ declare global {
   }
 }
 const Home: NextPage = () => {
+  // UT 위해서 (백엔드 구현 전) 임시로 CSR 로 변경
+  const CSRChallenge = dynamic(() => import("components/pages/main/Challenge"), { ssr: false });
   // challenge 관련 데이터
   // TODO: backend 연결 시 useAxiosData 로 변경하여 데이터 fetching 바람
   const apiGroupData = MOCKUP_CHALLENGES;
@@ -49,7 +51,7 @@ const Home: NextPage = () => {
           </MainPageCalendarContainer>
           <MainPageChallengesContainer>
             {apiGroupData.map((groupItem: any, index: any) => (
-              <Challenge key={index} {...groupItem} />
+              <CSRChallenge key={index} {...groupItem} />
             ))}
           </MainPageChallengesContainer>
         </PageLayout>
