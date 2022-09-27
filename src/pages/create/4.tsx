@@ -74,14 +74,13 @@ export default function InvitePage() {
           <p>초대 링크 보내기</p>
         </BlueBox>
 
-        <ConfirmBox
-          onClick={() => {
-            router.push("/");
-          }}
-          variants={defaultFadeInVariants}
-        >
+        {/* <Link href="/" passHref> */}
+        {/* <a> */}
+        <ConfirmBox onClick={() => router.push("/")} variants={defaultFadeInVariants}>
           <p>확인</p>
         </ConfirmBox>
+        {/* </a> */}
+        {/* </Link> */}
       </BoxContainer>
     </FormContainer>
   );
