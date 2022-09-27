@@ -8,6 +8,7 @@ import {
   StyledProfile,
 } from "components/common/Profile/styles";
 import MainPageBottomSheetSection from "components/pages/main/sections/MainPageBottomSheetSection";
+import * as gtag from "lib/gtag";
 import { resetButtonStyle } from "styles/utils/button";
 import { Member } from "types/api";
 
@@ -44,6 +45,18 @@ function Profile({
         onClick={() => {
           if (isClickable) {
             setIsShowing(true);
+            // if (dataLayer) {
+            //   console.log("EXISTS");
+            // } else {
+            //   console.log("NOOP");
+            // }
+            // gtag.dataLayer.push({ event: "add_clicked" });
+            gtag.event({
+              action: "view_item",
+              category: "engagement",
+              label: "Item clicked",
+              value: "view profile",
+            });
           }
         }}
       >
