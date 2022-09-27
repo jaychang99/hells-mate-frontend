@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import router from "next/router";
 import styled from "@emotion/styled";
 import { ImageContainer, MoveContainer } from "components/common/Container";
 import StepIndicator from "components/pages/create/StepIndicator";
@@ -69,7 +70,12 @@ export default function InvitePage() {
           <p>초대 링크 보내기</p>
         </BlueBox>
 
-        <ConfirmBox variants={defaultFadeInVariants}>
+        <ConfirmBox
+          onClick={() => {
+            router.push("/");
+          }}
+          variants={defaultFadeInVariants}
+        >
           <p>확인</p>
         </ConfirmBox>
       </BoxContainer>
