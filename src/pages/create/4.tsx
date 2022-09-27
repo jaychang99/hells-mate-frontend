@@ -12,7 +12,7 @@ import { defaultFadeInVariants, staggerOne } from "styles/motions";
 import { BoxStyle } from "../../components/common/BlueBox";
 import { Title } from "../../components/common/Description";
 
-import letter from "/public/icons/letter.svg";
+import letter from "/public/icons/letter.png";
 import lPolygon from "/public/icons/lPolygon.svg";
 
 const FormContainer = styled(motion.form)`
@@ -60,7 +60,7 @@ export default function InvitePage() {
       </MoveContainer>
       <Title variants={defaultFadeInVariants}>{headerText}</Title>
       <ImageContainer variants={defaultFadeInVariants}>
-        <Image alt={"letter"} src={letter} objectFit="scale-down" />
+        <Image width={150} height={110} alt={"letter"} src={letter} />
       </ImageContainer>
       <BoxContainer>
         <BlueBox
