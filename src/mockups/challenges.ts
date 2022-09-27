@@ -1,11 +1,20 @@
 import { ChallengeType } from "types/api";
+import { getLocalStorageAsJSON } from "utils/localStorage";
 
 import profile1 from "/public/images/mockUpProfileImage/profile1.jpg";
 
+const clientStorageData = getLocalStorageAsJSON([
+  "missionType",
+  "missionTitle",
+  "missionDescription",
+]);
+
 export const MOCKUP_CHALLENGES: ChallengeType[] = [
   {
-    challengeTitle: "맥주 안 마시기",
-    description: "30일 후에 중요 약속 있다면서 살빼야지 맥주 왜 마시냐",
+    challengeTitle: clientStorageData.missionTitle || "맥주 안 마시기",
+    description:
+      clientStorageData.missionDescription ||
+      "30일 후에 중요 약속 있다면서 살빼야지 맥주 왜 마시냐",
     category: 1,
     members: [
       {
