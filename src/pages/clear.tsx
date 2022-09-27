@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import styled from "@emotion/styled";
@@ -22,6 +23,9 @@ const BoxContainer = styled.div`
 export default function Clear() {
   return (
     <FormContainer variants={staggerOne} initial="initial" whileInView="animate" exit="exit">
+      <Head>
+        <title>헬스메이트 :: 미션 달성 완료!</title>
+      </Head>
       <Title variants={defaultFadeInVariants}>수고하셨어요!</Title>
       <SubDescript variants={defaultFadeInVariants}>
         미션 하나를 달성하셨어요!

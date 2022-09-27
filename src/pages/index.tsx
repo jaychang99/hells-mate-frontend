@@ -1,6 +1,7 @@
 import { FormEvent, useCallback, useState } from "react";
 import type { NextPage } from "next";
 import dynamic from "next/dynamic";
+import Head from "next/head";
 import Router from "next/router";
 import RankingIcon from "components/common/icons/RankingIcon";
 import PageLayout from "components/common/Layout/PageLayout";
@@ -41,6 +42,9 @@ const Home: NextPage = () => {
   if (apiGroupData) {
     return (
       <MainPageChallengeProvider value={{ apiGroupData }}>
+        <Head>
+          <title>헬스메이트 :: No.1 건강 플랫폼</title>
+        </Head>
         <PageLayout>
           <AddChallengeAnchor onClick={gotoAddChallengePage} />
           <MainPageTopRowContainer>

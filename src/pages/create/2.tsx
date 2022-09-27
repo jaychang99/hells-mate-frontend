@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from "react";
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import BlueNextAnchor from "components/common/BlueNextAnchor";
@@ -27,6 +28,9 @@ export default function SetGroupPage() {
 
   return (
     <FormContainer variants={staggerOne} initial="initial" whileInView="animate" exit="exit">
+      <Head>
+        <title>헬스메이트 :: 그룹 설명 입력</title>
+      </Head>
       <MoveContainer>
         <Link href="/create/1" passHref>
           <GobackAnchor variants={defaultFadeInVariants}>

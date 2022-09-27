@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Image from "next/image";
 import Router from "next/router";
 import styled from "@emotion/styled";
@@ -31,6 +32,9 @@ export default function ReceivePage() {
 
   return (
     <FormContainer variants={staggerOne} initial="initial" whileInView="animate" exit="exit">
+      <Head>
+        <title>헬스메이트 :: 초대 수락</title>
+      </Head>
       <MoveContainer />
       <Title variants={defaultFadeInVariants}>
         링크를 받으셨습니다.
