@@ -9,6 +9,8 @@ export interface ChallengeType {
   description: string;
   category: number;
   members: Member[];
+  startDate?: Date;
+  endDate?: Date;
 }
 
 export interface ApiResponse<T> {
