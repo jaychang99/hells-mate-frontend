@@ -1,3 +1,5 @@
+import { addDays, subDays } from "date-fns";
+import { utcToZonedTime } from "date-fns-tz";
 import { ChallengeType } from "types/api";
 import { getLocalStorageAsJSON } from "utils/localStorage";
 
@@ -11,6 +13,8 @@ const clientStorageData = getLocalStorageAsJSON([
   "missionEndDate",
 ]);
 
+const today = utcToZonedTime(new Date(), "Asia/Seoul");
+
 export const MOCKUP_CHALLENGES: ChallengeType[] = [
   {
     challengeTitle: clientStorageData.missionTitle || "맥주 안 마시기",
@@ -18,8 +22,8 @@ export const MOCKUP_CHALLENGES: ChallengeType[] = [
       clientStorageData.missionDescription ||
       "30일 후에 중요 약속 있다면서 살빼야지 맥주 왜 마시냐",
     category: 1,
-    startDate: new Date("2022-09-26"),
-    endDate: new Date("2022-09-30"),
+    startDate: new Date(clientStorageData.missionStartDate || subDays(today, 2)),
+    endDate: new Date(clientStorageData.missionEndDate || addDays(today, 2)),
     members: [
       {
         id: 1,
