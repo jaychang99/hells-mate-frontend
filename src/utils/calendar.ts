@@ -22,9 +22,9 @@ export function populateDateArray(startDate: Date, endDate: Date) {
 }
 
 export function compareUTCYYYYDDMM(date1: Date, date2: Date) {
-  if (date1.getUTCFullYear() === date2.getUTCFullYear()) {
-    if (date1.getUTCMonth() === date2.getUTCMonth()) {
-      if (date1.getUTCDate() === date2.getUTCDate()) {
+  if (date1.getFullYear() === date2.getFullYear()) {
+    if (date1.getMonth() === date2.getMonth()) {
+      if (date1.getDate() === date2.getDate()) {
         return true;
       }
     }
