@@ -55,7 +55,7 @@ const Home: NextPage = () => {
           </MainPageCalendarContainer>
           <MainPageChallengesContainer>
             {apiGroupData.map((groupItem: any, index: any) => (
-              <CSRChallenge key={index} {...groupItem} />
+              <CSRChallenge key={index} {...groupItem} selectedDate={selectedDate} />
             ))}
           </MainPageChallengesContainer>
         </PageLayout>
