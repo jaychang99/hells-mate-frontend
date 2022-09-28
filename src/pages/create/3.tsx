@@ -100,14 +100,14 @@ export default function SetMission() {
         placeholder="미션의 제목을 입력해주세요."
       />
       <GroupDescription variants={defaultFadeInVariants}>
-        미션의 내용을 입력해주세요.
+        미션의 상세 계획을 입력해주세요.
       </GroupDescription>
       <StyledTextarea
         ref={missionDescriptionRef}
         value={aboutMission}
         onChange={onAboutMission}
         variants={defaultFadeInVariants}
-        placeholder="미션의 내용을 입력해주세요."
+        placeholder="미션의 상세 계획을 입력해주세요."
       />
       <Link href="/create/4" passHref>
         <BlueNextAnchor onClick={handleMissionInfo} />
