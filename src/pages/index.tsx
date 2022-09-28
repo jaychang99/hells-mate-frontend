@@ -14,6 +14,7 @@ import {
   MainPageChallengesContainer,
   MainPageTopRowContainer,
 } from "components/pages/main/styles";
+import { utcToZonedTime } from "date-fns-tz";
 
 // import { useAxiosData } from "hooks/useAxiosData";
 import { MOCKUP_CHALLENGES } from "../mockups/challenges";
@@ -30,8 +31,9 @@ const Home: NextPage = () => {
   // TODO: backend 연결 시 useAxiosData 로 변경하여 데이터 fetching 바람
   const apiGroupData = MOCKUP_CHALLENGES;
 
+  const today = utcToZonedTime(new Date(), "Asia/Seoul");
   // Calendar 상태 관리
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(today);
 
   const gotoAddChallengePage = useCallback((e: FormEvent<HTMLAnchorElement>) => {
     e.preventDefault();

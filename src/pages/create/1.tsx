@@ -8,6 +8,7 @@ import { Title } from "components/common/Description";
 import StepIndicator from "components/pages/create/StepIndicator";
 import { FormContainer } from "components/pages/create/styles";
 import { intervalToDuration } from "date-fns";
+import { utcToZonedTime } from "date-fns-tz";
 import { motion } from "framer-motion";
 import DatePicker from "react-datepicker";
 import { defaultFadeInVariants, staggerOne } from "styles/motions";
@@ -41,8 +42,9 @@ const DatePickerWrapper = styled(motion.div)`
 `;
 
 export default function SetDayPage() {
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const today = utcToZonedTime(new Date(), "Asia/Seoul");
+  const [startDate, setStartDate] = useState(today);
+  const [endDate, setEndDate] = useState(today);
   const [durationDay, setDurationDay] = useState(0);
 
   const handleMissionDate = useCallback(async () => {
