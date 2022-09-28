@@ -14,6 +14,7 @@ export const ContributionHeaderTitle = styled.div`
 `;
 
 export const ContributionHeaderDateCardContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
 `;

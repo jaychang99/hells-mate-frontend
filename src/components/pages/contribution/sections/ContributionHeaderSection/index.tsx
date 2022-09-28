@@ -1,4 +1,5 @@
 import { HTMLAttributes } from "react";
+import { css } from "@emotion/react";
 import DateCard from "components/common/DateCard";
 import TopSheet from "components/common/TopSheet";
 import {
@@ -19,6 +20,9 @@ export function ContributionHeaderSection(props: Props) {
         <ContributionHeaderDateCardContainer>
           {MOCKUP_CONTRIBUTION_BREAKPOINTS.map((breakpoint, index) => (
             <DateCard
+              css={css`
+                width: 100%;
+              `}
               key={index}
               dateCardTitle={(index + 1).toString()}
               dateCardContent={breakpoint}
