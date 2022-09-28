@@ -15,7 +15,7 @@ import {
   FlexSpaceBetweenContainer,
   StyledChallenge,
 } from "components/pages/main/Challenge/styles";
-import { isAfter, isBefore } from "date-fns";
+import { isAfter, isBefore, isSameDay } from "date-fns";
 import { ChallengeType } from "types/api";
 
 import dumbbellIcon from "/public/images/dumbbellIcon.svg";
@@ -48,7 +48,9 @@ function Challenge({
   // const today = utcToZonedTime(new Date(), "Asia/Seoul");
   const [isShown, setIsShown] = useState(
     startDate && endDate
-      ? isAfter(selectedDate, startDate) && isBefore(selectedDate, endDate)
+      ? (isAfter(selectedDate, startDate) && isBefore(selectedDate, endDate)) ||
+          isSameDay(selectedDate, startDate) ||
+          isSameDay(selectedDate, endDate)
       : true
   );
 
