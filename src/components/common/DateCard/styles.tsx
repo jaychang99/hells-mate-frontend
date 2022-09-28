@@ -12,7 +12,7 @@ export const StyledDateCard = styled.div<StyleDateCardProps>`
   row-gap: 3px;
   padding: 12px;
   min-width: 70px;
-  max-width: 70px;
+  /* max-width: 70px; */
   height: 80px;
   background-color: ${({ theme, isSelected }) =>
     isSelected ? theme.color.primary700 : theme.color.white};
