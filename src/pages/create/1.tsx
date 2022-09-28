@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import styled from "@emotion/styled";
@@ -45,6 +45,11 @@ export default function SetDayPage() {
   const [endDate, setEndDate] = useState(new Date());
   const [durationDay, setDurationDay] = useState(0);
 
+  const handleMissionDate = useCallback(async () => {
+    localStorage.setItem("missionStartDate", startDate.toDateString() || "");
+    localStorage.setItem("missionEndDate", endDate.toDateString() || "");
+  }, [startDate, endDate]);
+
   return (
     <FormContainer variants={staggerOne} initial="initial" whileInView="animate" exit="exit">
       <Head>
@@ -88,7 +93,7 @@ export default function SetDayPage() {
         />
       </DatePickerWrapper>
       <Link href="/create/2" passHref>
-        <BlueNextAnchor />
+        <BlueNextAnchor onClick={handleMissionDate} />
       </Link>
     </FormContainer>
   );
