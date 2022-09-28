@@ -7,6 +7,8 @@ const clientStorageData = getLocalStorageAsJSON([
   "missionType",
   "missionTitle",
   "missionDescription",
+  "missionStartDate",
+  "missionEndDate",
 ]);
 
 export const MOCKUP_CHALLENGES: ChallengeType[] = [
@@ -16,6 +18,8 @@ export const MOCKUP_CHALLENGES: ChallengeType[] = [
       clientStorageData.missionDescription ||
       "30일 후에 중요 약속 있다면서 살빼야지 맥주 왜 마시냐",
     category: 1,
+    startDate: new Date("2022-09-26"),
+    endDate: new Date("2022-09-30"),
     members: [
       {
         id: 1,
