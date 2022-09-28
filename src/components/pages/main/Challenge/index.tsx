@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from "react";
+import React, { HTMLAttributes, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { css } from "@emotion/react";
@@ -15,6 +15,7 @@ import {
   FlexSpaceBetweenContainer,
   StyledChallenge,
 } from "components/pages/main/Challenge/styles";
+import { isAfter, isBefore } from "date-fns";
 import { ChallengeType } from "types/api";
 
 import dumbbellIcon from "/public/images/dumbbellIcon.svg";
@@ -25,6 +26,7 @@ import navigateNextIcon from "/public/images/navigateNext.svg";
 
 interface Props extends HTMLAttributes<HTMLDivElement>, ChallengeType {
   onAreaClick: () => void;
+  selectedDate: Date;
 }
 
 function Challenge({
@@ -33,61 +35,76 @@ function Challenge({
   members,
   category,
   onAreaClick,
+  startDate,
+  endDate,
+  selectedDate,
   ...props
 }: Props) {
   const onAreaClickHandler = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target !== e.currentTarget) return;
     onAreaClick();
   };
-  return (
-    <StyledChallenge onClick={onAreaClickHandler} {...props}>
-      <FlexRibbonColumn>
-        <ChallengeRibbon category={category} />
-      </FlexRibbonColumn>
-      <FlexContentColumn
-        css={css`
-          flex-grow: 1;
-        `}
-      >
-        <FlexContentIconColumn>
-          <Image alt="icon" src={category == 1 ? forkKinfeIcon : dumbbellIcon} />
-        </FlexContentIconColumn>
-        <FlexSpaceBetweenContainer>
-          <FlexContentInfoColumn
-            css={css`
-              flex-grow: 1;
-              justify-content: space-between;
-            `}
-          >
-            <div>
-              <ChallengeTitleText>{challengeTitle}</ChallengeTitleText>
-              <ChallengeDescriptionText>{description}</ChallengeDescriptionText>
-            </div>
-            <ChallengeProfile
-              category={category}
-              members={members}
-              challengeTitle={challengeTitle}
-              description={description}
-            />
-          </FlexContentInfoColumn>
-          <FlexLastColumn>
-            <Link href="#" passHref>
-              <a>
-                <Image alt="navigation next icon" src={navigateNextIcon} />
-              </a>
-            </Link>
 
-            <Image
-              alt="big dumbbell icon"
-              src={category === 1 ? foodIcon : bigDumbbellIcon}
-              width={90}
-              height={90}
-            />
-          </FlexLastColumn>
-        </FlexSpaceBetweenContainer>
-      </FlexContentColumn>
-    </StyledChallenge>
+  // const today = utcToZonedTime(new Date(), "Asia/Seoul");
+  const [isShown, setIsShown] = useState(
+    startDate && endDate
+      ? isAfter(selectedDate, startDate) && isBefore(selectedDate, endDate)
+      : true
   );
+
+  if (isShown) {
+    return (
+      <StyledChallenge onClick={onAreaClickHandler} {...props}>
+        <FlexRibbonColumn>
+          <ChallengeRibbon category={category} />
+        </FlexRibbonColumn>
+        <FlexContentColumn
+          css={css`
+            flex-grow: 1;
+          `}
+        >
+          <FlexContentIconColumn>
+            <Image alt="icon" src={category == 1 ? forkKinfeIcon : dumbbellIcon} />
+          </FlexContentIconColumn>
+          <FlexSpaceBetweenContainer>
+            <FlexContentInfoColumn
+              css={css`
+                flex-grow: 1;
+                justify-content: space-between;
+              `}
+            >
+              <div>
+                <ChallengeTitleText>{challengeTitle}</ChallengeTitleText>
+                <ChallengeDescriptionText>{description}</ChallengeDescriptionText>
+              </div>
+              <ChallengeProfile
+                category={category}
+                members={members}
+                challengeTitle={challengeTitle}
+                description={description}
+              />
+            </FlexContentInfoColumn>
+            <FlexLastColumn>
+              <Link href="#" passHref>
+                <a>
+                  <Image alt="navigation next icon" src={navigateNextIcon} />
+                </a>
+              </Link>
+
+              <Image
+                alt="big dumbbell icon"
+                src={category === 1 ? foodIcon : bigDumbbellIcon}
+                width={90}
+                height={90}
+              />
+            </FlexLastColumn>
+          </FlexSpaceBetweenContainer>
+        </FlexContentColumn>
+      </StyledChallenge>
+    );
+  } else {
+    return null;
+  }
 }
 
 export default Challenge;
