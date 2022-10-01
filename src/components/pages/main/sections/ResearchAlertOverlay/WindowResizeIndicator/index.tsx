@@ -15,9 +15,9 @@ const RESIZE_REQUEST_TEXT = [
 ];
 
 function setWarningLevelBasedOnWidth(width: number) {
-  if (width < 470) {
+  if (width < 520) {
     return 0;
-  } else if (470 <= width && width < 1000) {
+  } else if (520 <= width && width < 1000) {
     return 1;
   } else {
     return 2;
