@@ -20,7 +20,7 @@ interface Props {
 }
 
 // 사용자가 이용승인한 것을 몇 초 동안 유지할지
-const ACCEPT_COOKIE_AGE = 60 * 10;
+const ACCEPT_COOKIE_AGE = 60 * 30;
 
 function ReasearchAlertOverlay({ isShown, onAccept, ...props }: Props) {
   const today = new Date();
