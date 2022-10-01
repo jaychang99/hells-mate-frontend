@@ -7,6 +7,7 @@ import {
   ResearchAlertOverlayDescriptionText,
   StyledResearchAlertOverlay,
 } from "components/pages/main/sections/ResearchAlertOverlay/styles";
+import WindowResizeIndicator from "components/pages/main/sections/ResearchAlertOverlay/WindowResizeIndicator";
 import { addSeconds } from "date-fns";
 
 import signature from "/public/images/hellsmate_signature.png";
@@ -65,6 +66,7 @@ function ReasearchAlertOverlay({ isShown, onAccept, ...props }: Props) {
           <a href="mailto:jaychang99@gmail.com">jaychang99@gmail.com</a>
           <br />로 남겨주세요!
         </ResearchAlertOverlayDescriptionText>
+        <WindowResizeIndicator />
         <Button
           css={css`
             margin-top: 30px;
