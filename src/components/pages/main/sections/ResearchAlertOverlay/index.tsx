@@ -37,8 +37,8 @@ function ReasearchAlertOverlay({ isShown, onAccept, ...props }: Props) {
         <Image
           alt={"hellsmate_signature"}
           src={signature}
-          width={277}
-          height={60}
+          width={300}
+          height={80}
           objectFit="cover"
         />
         <Title
