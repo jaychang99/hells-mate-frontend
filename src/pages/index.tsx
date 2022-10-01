@@ -16,6 +16,9 @@ import {
   MainPageTopRowContainer,
 } from "components/pages/main/styles";
 import { utcToZonedTime } from "date-fns-tz";
+import { useIsomorphicLayoutEffect } from "hooks/useIsomorphicLayoutEffect";
+import { isBrowser } from "styles/utils/isBrowser";
+import { getCookie } from "utils/cookie";
 
 // import { useAxiosData } from "hooks/useAxiosData";
 import { MOCKUP_CHALLENGES } from "../mockups/challenges";
@@ -41,6 +44,24 @@ const Home: NextPage = () => {
     Router.push("/create/1");
   }, []);
 
+  // ResearchAlertOverlay 관련
+  const [isShown, setIsShown] = useState<boolean>(true);
+  useIsomorphicLayoutEffect(() => {
+    setIsShown(!getAgreeStatus());
+  }, []);
+
+  function getAgreeStatus() {
+    let agreeStatus = isBrowser()
+      ? getCookie(document.cookie, "agreed") === "true"
+        ? true
+        : false
+      : false;
+    console.log("RAWCOOKIE", document.cookie);
+    console.log("AGREESTATUS", agreeStatus);
+    console.log("GETCOOKIE", getCookie(document.cookie, "agreed"));
+    return agreeStatus;
+  }
+
   // TODO: useSWR 로 대체 예정
   if (apiGroupData) {
     return (
@@ -49,7 +70,7 @@ const Home: NextPage = () => {
           <title>헬스메이트 :: No.1 건강 플랫폼</title>
         </Head>
         <PageLayout>
-          <ReasearchAlertOverlay />
+          <ReasearchAlertOverlay isShown={isShown} onAccept={() => setIsShown(false)} />
           <AddChallengeAnchor onClick={gotoAddChallengePage} />
           <MainPageTopRowContainer>
             <RankingIcon />

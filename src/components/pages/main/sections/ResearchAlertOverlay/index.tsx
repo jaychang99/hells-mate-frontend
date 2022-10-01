@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Image from "next/image";
 import { css } from "@emotion/react";
 import Button from "components/common/Button";
@@ -11,10 +10,26 @@ import {
 
 import signature from "/public/images/hellsmate_signature.png";
 
-function ReasearchAlertOverlay() {
-  const [isShown, setIsShown] = useState(true);
+// 유저가 한 번 서비스 이용에 동의하면 localStorage에 저장해서 다시 뜨지 않도록 하는 구조
+interface Props {
+  isShown: boolean;
+  onAccept: () => void;
+}
+
+function ReasearchAlertOverlay({ isShown, onAccept, ...props }: Props) {
+  // const [isShown, setIsShown] = useState<boolean>(true);
+  // useIsomorphicLayoutEffect(() => {
+  //   setIsShown(getAgreeStatus);
+  // }, []);
+
+  function handleAgree() {
+    document.cookie = "agreed=true";
+    console.log(document.cookie);
+    onAccept();
+  }
+
   return (
-    <Modal onlyContent={true} open={isShown} onClose={() => setIsShown(false)}>
+    <Modal onlyContent={true} open={isShown} onClose={onAccept}>
       <StyledResearchAlertOverlay>
         <Image
           alt={"hellsmate_signature"}
@@ -54,7 +69,7 @@ function ReasearchAlertOverlay() {
             max-width: 280px;
           `}
           variant="default"
-          onClick={() => setIsShown(false)}
+          onClick={handleAgree}
         >
           서비스 체험해보기!
         </Button>
