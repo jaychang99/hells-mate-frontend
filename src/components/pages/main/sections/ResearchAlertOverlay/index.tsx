@@ -9,6 +9,7 @@ import {
 } from "components/pages/main/sections/ResearchAlertOverlay/styles";
 import WindowResizeIndicator from "components/pages/main/sections/ResearchAlertOverlay/WindowResizeIndicator";
 import { addSeconds } from "date-fns";
+import { resetAnchorStyle } from "styles/utils/anchor";
 
 import signature from "/public/images/hellsmate_signature.png";
 
@@ -59,11 +60,25 @@ function ReasearchAlertOverlay({ isShown, onAccept, ...props }: Props) {
           <br />
           <br /> 측정 데이터는 익명으로 수집되고, 개인을 특정할 수 없습니다. <br />
           <br />
-          관련된 문의는 <br />
-          <a href="mailto:ch79333@gmail.com">ch79333@gmail.com</a>
-          <br />
-          <a href="mailto:jaychang99@gmail.com">jaychang99@gmail.com</a>
-          <br />로 남겨주세요!
+          관련된 문의는 &nbsp;
+          <a
+            css={css`
+              ${resetAnchorStyle}
+            `}
+            href="mailto:ch79333@gmail.com"
+          >
+            ch79333@gmail.com
+          </a>
+          ,&nbsp;
+          <a
+            css={css`
+              ${resetAnchorStyle}
+            `}
+            href="mailto:jaychang99@gmail.com"
+          >
+            jaychang99@gmail.com
+          </a>
+          로 남겨주세요!
         </ResearchAlertOverlayDescriptionText>
         <WindowResizeIndicator
           css={css`
