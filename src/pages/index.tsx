@@ -56,9 +56,6 @@ const Home: NextPage = () => {
         ? true
         : false
       : false;
-    console.log("RAWCOOKIE", document.cookie);
-    console.log("AGREESTATUS", agreeStatus);
-    console.log("GETCOOKIE", getCookie(document.cookie, "agreed"));
     return agreeStatus;
   }
 

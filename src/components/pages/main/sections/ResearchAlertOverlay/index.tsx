@@ -27,7 +27,6 @@ function ReasearchAlertOverlay({ isShown, onAccept, ...props }: Props) {
   //
   function handleAgree() {
     document.cookie = `agreed=true; expires=${addSeconds(today, ACCEPT_COOKIE_AGE).toUTCString()}`;
-    console.log(document.cookie);
     onAccept();
   }
 
