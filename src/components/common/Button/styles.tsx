@@ -17,5 +17,5 @@ export const StyledButton = styled.button<StyleProps>`
   background-color: ${({ theme, variant }) =>
     variant === "disable" ? theme.color.primary200 : theme.color.primary700};
   border-radius: 5px;
-  cursor: not-allowed;
+  cursor: ${({ theme, variant }) => (variant === "disable" ? "not-allowed" : "pointer")};
 `;
