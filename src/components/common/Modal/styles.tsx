@@ -6,6 +6,10 @@ import { hexToRgba } from "utils/color";
 
 const PADDING = 20;
 
+interface StyleProps {
+  fullScreen: boolean;
+}
+
 export const DimmedArea = styled.div`
   position: fixed;
   top: 0;
@@ -23,13 +27,13 @@ export const DimmedArea = styled.div`
   z-index: 60;
 `;
 
-export const ModalContainer = styled.div`
+export const ModalContainer = styled.div<StyleProps>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
-  width: 600px;
-  min-height: 305px;
+  width: ${({ theme, fullScreen }) => (fullScreen ? "100%" : "600px")};
+  min-height: ${({ theme, fullScreen }) => (fullScreen ? "100%" : "305px")};
   max-height: 600px;
   padding: 0 ${PADDING}px;
 

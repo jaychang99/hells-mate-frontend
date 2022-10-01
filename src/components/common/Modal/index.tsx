@@ -24,9 +24,10 @@ function ScrollPreventer() {
 interface Props extends Omit<HTMLAttributes<HTMLDivElement>, "title"> {
   open: boolean;
   onClose: () => void;
-  title: ReactNode;
+  title?: ReactNode;
   withCloseButton?: boolean;
-  buttons: ReactNode;
+  buttons?: ReactNode;
+  onlyContent?: boolean;
 }
 
 function Modal({
@@ -36,6 +37,7 @@ function Modal({
   withCloseButton = false,
   buttons,
   children,
+  onlyContent = false,
   ...props
 }: Props) {
   const {
@@ -48,7 +50,7 @@ function Modal({
     setMounted(true);
   }, []);
 
-  const modal = (
+  const modal = onlyContent ? (
     <>
       {open && (
         <>
@@ -60,7 +62,26 @@ function Modal({
               }
             }}
           >
-            <ModalContainer {...props}>
+            <ModalContainer fullScreen={onlyContent} {...props}>
+              <ContentContainer>{children}</ContentContainer>
+            </ModalContainer>
+          </DimmedArea>
+        </>
+      )}
+    </>
+  ) : (
+    <>
+      {open && (
+        <>
+          <ScrollPreventer />
+          <DimmedArea
+            onClick={({ target, currentTarget }) => {
+              if (target === currentTarget) {
+                onClose();
+              }
+            }}
+          >
+            <ModalContainer fullScreen={onlyContent} {...props}>
               <TitleContainer>
                 {title}
                 <CloseButton onClick={onClose}>

@@ -9,6 +9,7 @@ import AddChallengeAnchor from "components/pages/main/AddChallengeAnchor";
 import Calendar from "components/pages/main/Calendar";
 import { MainPageChallengeProvider } from "components/pages/main/contexts/MainPageChallengeContext";
 import Loading from "components/pages/main/Loading";
+import ReasearchAlertOverlay from "components/pages/main/sections/ResearchAlertOverlay";
 import {
   MainPageCalendarContainer,
   MainPageChallengesContainer,
@@ -48,6 +49,7 @@ const Home: NextPage = () => {
           <title>헬스메이트 :: No.1 건강 플랫폼</title>
         </Head>
         <PageLayout>
+          <ReasearchAlertOverlay />
           <AddChallengeAnchor onClick={gotoAddChallengePage} />
           <MainPageTopRowContainer>
             <RankingIcon />
