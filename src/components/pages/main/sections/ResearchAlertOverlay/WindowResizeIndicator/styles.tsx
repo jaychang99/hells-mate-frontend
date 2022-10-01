@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 export const WindowResizeIndicatorContainer = styled.div`
   display: flex;
   flex-direction: column;
-
+  row-gap: 20px;
   align-items: center;
 `;
 

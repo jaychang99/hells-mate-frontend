@@ -24,7 +24,7 @@ function setWarningLevelBasedOnWidth(width: number) {
   }
 }
 
-function WindowResizeIndicator() {
+function WindowResizeIndicator(props: Props) {
   const [warningLevel, setWarningLevel] = useState(0);
 
   useIsomorphicLayoutEffect(() => {
@@ -42,7 +42,7 @@ function WindowResizeIndicator() {
     };
   });
   return (
-    <WindowResizeIndicatorContainer>
+    <WindowResizeIndicatorContainer {...props}>
       <WindowResizeIndicatorText>
         PC 에서도 최적의 경험을 위해 브라우저 창 사이즈를 줄여주세요!
       </WindowResizeIndicatorText>

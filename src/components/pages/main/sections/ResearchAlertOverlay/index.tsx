@@ -65,7 +65,11 @@ function ReasearchAlertOverlay({ isShown, onAccept, ...props }: Props) {
           <a href="mailto:jaychang99@gmail.com">jaychang99@gmail.com</a>
           <br />로 남겨주세요!
         </ResearchAlertOverlayDescriptionText>
-        <WindowResizeIndicator />
+        <WindowResizeIndicator
+          css={css`
+            margin-top: 30px;
+          `}
+        />
         <Button
           css={css`
             margin-top: 30px;
