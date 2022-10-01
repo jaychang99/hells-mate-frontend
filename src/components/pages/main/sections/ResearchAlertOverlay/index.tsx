@@ -7,6 +7,7 @@ import {
   ResearchAlertOverlayDescriptionText,
   StyledResearchAlertOverlay,
 } from "components/pages/main/sections/ResearchAlertOverlay/styles";
+import { addSeconds } from "date-fns";
 
 import signature from "/public/images/hellsmate_signature.png";
 
@@ -16,14 +17,15 @@ interface Props {
   onAccept: () => void;
 }
 
-function ReasearchAlertOverlay({ isShown, onAccept, ...props }: Props) {
-  // const [isShown, setIsShown] = useState<boolean>(true);
-  // useIsomorphicLayoutEffect(() => {
-  //   setIsShown(getAgreeStatus);
-  // }, []);
+// 사용자가 이용승인한 것을 몇 초 동안 유지할지
+const ACCEPT_COOKIE_AGE = 60 * 10;
 
+function ReasearchAlertOverlay({ isShown, onAccept, ...props }: Props) {
+  const today = new Date();
+
+  //
   function handleAgree() {
-    document.cookie = "agreed=true";
+    document.cookie = `agreed=true; expires=${addSeconds(today, ACCEPT_COOKIE_AGE).toUTCString()}`;
     console.log(document.cookie);
     onAccept();
   }
