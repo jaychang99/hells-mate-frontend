@@ -61,28 +61,31 @@ const Home: NextPage = () => {
 
   // TODO: useSWR 로 대체 예정
   if (apiGroupData) {
-    return (
-      <MainPageChallengeProvider value={{ apiGroupData }}>
-        <Head>
-          <title>헬스메이트 :: No.1 건강 플랫폼</title>
-        </Head>
-        <PageLayout>
-          <ReasearchAlertOverlay isShown={isShown} onAccept={() => setIsShown(false)} />
-          <AddChallengeAnchor onClick={gotoAddChallengePage} />
-          <MainPageTopRowContainer>
-            <RankingIcon />
-          </MainPageTopRowContainer>
-          <MainPageCalendarContainer>
-            <Calendar onDateChange={setSelectedDate} selectedDate={selectedDate} />
-          </MainPageCalendarContainer>
-          <MainPageChallengesContainer>
-            {apiGroupData.map((groupItem: any, index: any) => (
-              <CSRChallenge key={index} {...groupItem} selectedDate={selectedDate} />
-            ))}
-          </MainPageChallengesContainer>
-        </PageLayout>
-      </MainPageChallengeProvider>
-    );
+    if (isShown) {
+      return <ReasearchAlertOverlay isShown={isShown} onAccept={() => setIsShown(false)} />;
+    } else {
+      return (
+        <MainPageChallengeProvider value={{ apiGroupData }}>
+          <Head>
+            <title>헬스메이트 :: No.1 건강 플랫폼</title>
+          </Head>
+          <PageLayout>
+            <AddChallengeAnchor onClick={gotoAddChallengePage} />
+            <MainPageTopRowContainer>
+              <RankingIcon />
+            </MainPageTopRowContainer>
+            <MainPageCalendarContainer>
+              <Calendar onDateChange={setSelectedDate} selectedDate={selectedDate} />
+            </MainPageCalendarContainer>
+            <MainPageChallengesContainer>
+              {apiGroupData.map((groupItem: any, index: any) => (
+                <CSRChallenge key={index} {...groupItem} selectedDate={selectedDate} />
+              ))}
+            </MainPageChallengesContainer>
+          </PageLayout>
+        </MainPageChallengeProvider>
+      );
+    }
   } else {
     return <Loading />;
   }
